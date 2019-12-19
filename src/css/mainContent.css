@@ -1,0 +1,15 @@
+.tags-container{
+    height: 300px;
+}
+
+.tag-container{
+    border: 2px solid gray;
+    border-radius: 8px;
+    text-overflow: 'hidden';
+}
+.tag-container >p{
+    height: 70%;
+}
+.tag-stat-container{
+    border-top: 1px solid gray;
+}

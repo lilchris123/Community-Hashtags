@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.footer{
+  background-color: #282c34;
+  color: whitesmoke;
+  height: 100px;
+}
