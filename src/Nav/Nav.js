@@ -27,7 +27,7 @@ export function Nav() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
-                  About
+                  Categories
                 </a>
               </li>
               <li className="nav-item">
