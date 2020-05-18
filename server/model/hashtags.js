@@ -1,23 +1,18 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var tagSchema = mongoose.Schema({
-  tagName: { type: String, required: true, unique: true, trim: true }
-});
+// var tagSchema = mongoose.Schema({
+//   tagName: { type: String, required: true, unique: true, trim: true }
+// });
 
-var tagsSchema = mongoose.Schema({
-  tags: [String]
-});
+// var tagsSchema = mongoose.Schema({
+//   tags: [String]
+// });
 
-var tagsCollectionSchema = mongoose.Schema({
+const tagsCollectionSchema = mongoose.Schema({
   name: String,
   tags: [[String]]
 });
 
+const tagsCollection = mongoose.model("tagsCollection", tagsCollectionSchema);
 
-// var tag= mongoose.model("tag",tagSchema);
-// var tags= mongoose.model("tags",tagsSchema);
-var tagsCollection = mongoose.model("tagsCollection", tagsCollectionSchema);
-
-//module.exports = tag;
-//module.exports = tags;
 module.exports = tagsCollection;

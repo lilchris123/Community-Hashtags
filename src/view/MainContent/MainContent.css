@@ -1,0 +1,22 @@
+.tags-container {
+  /*height: 300px;*/
+}
+
+.tag-container {
+  height: 200px;
+  border: 2px solid gray;
+  border-radius: 8px;
+  text-overflow: "hidden";
+}
+.tag-container:hover {
+  border: 2px solid blue;
+}
+.tag-container > p {
+  height: 70%;
+}
+.tag-stat-container {
+  border-top: 1px solid gray;
+  padding-top: 2px;
+  display: flex;
+  justify-content: space-between;
+}
