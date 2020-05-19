@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import "./App.css";
 import Nav from "./view/Nav/Nav";
-import MainContent from './view/MainContent/MainContent';
+import MainContentContainer from './view/MainContent/MainContentContainer';
 import Categories from './view/Categories/Categories';
 import Login from './view/Login/Login';
 import SelectComponent from './view/SelectComponent/SelectComponent';
@@ -15,7 +15,7 @@ function App(){
       </header>
       
       <Switch>
-      <Route path='/' component={MainContent} exact/>
+      <Route path='/' component={MainContentContainer} exact/>
       <Route path='/categories' component={Categories}/>
       <Route path='/login' component={Login}/>
       <Route path='/test' component={SelectComponent}/>

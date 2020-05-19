@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Categories.css'
+import './Categories.scss'
 
 export default class Categories extends Component {
     constructor(props) {
