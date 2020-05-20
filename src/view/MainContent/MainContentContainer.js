@@ -6,14 +6,16 @@ import MainContentView from './MainContentView';
 const mapStateToProps = (state)=> {
     return {
         isLoading: mainContentSelector.getLoading(state),
-        topTags: mainContentSelector.getTopTags(state),
+        hashtags: mainContentSelector.getHashtags(state),
+        categoryHashtags: mainContentSelector.getCategoryHashtags(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state)
     }
 }
 
 const mapDispatchToProps = (dispatch)=> {
     return {
-        fetchTopHashtags: ()=> dispatch(Actions.fetchTopHashtags()),
+        fetchHashtags: ()=> dispatch(Actions.fetchHashtags()),
+        fetchHashtagsByCategory: (category)=> dispatch(Actions.fetchHashtagsByCategory(category)),
         updateCopiedHashtags: (id)=> dispatch(Actions.copiedHashtags(id))
     }
 }

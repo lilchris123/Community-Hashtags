@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const topTagSchema= mongoose.Schema({
+const categorySchema= mongoose.Schema({
     popular: [
         [{type: String, required: true, unique: true, trim: true}],
         [{type: String, required: true, unique: true, trim: true}],
@@ -8,5 +8,5 @@ const topTagSchema= mongoose.Schema({
     ]
 });
 
-const topTags= mongoose.model('topTags',topTagSchema);
-module.exports= topTags;
+const category= mongoose.model('category',categorySchema);
+module.exports= category;

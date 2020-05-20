@@ -13,7 +13,7 @@ const Hashtags = (props) => {
         <p>{tags.map(i => `${i} `)}</p>
         <div className="hashtags-stat-container">
           <i className="fa fa-heart"> {100 * index}</i>
-          <p className={`badge ${badgeColor}`} onClick={onCopy.bind(this, index)}>
+          <p className={`badge ${badgeColor}`} onClick={()=> onCopy(index)}>
             {copyBtnText}
           </p>
         </div>
@@ -25,7 +25,10 @@ Hashtags.propTypes={
   index: PropTypes.number.isRequired,
   tags: PropTypes.arrayOf(String).isRequired,
   isCopied: PropTypes.bool.isRequired,
-  onCopy: PropTypes.func.isRequired
+  onCopy: PropTypes.func
+}
+Hashtags.defaultProps ={
+  onCopy: () => {}
 }
 
 export default Hashtags;
