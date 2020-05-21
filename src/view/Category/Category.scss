@@ -1,0 +1,15 @@
+.category-container {
+    height: 200px;
+    border: 2px solid gray;
+    border-radius: 8px;
+    text-overflow: "hidden";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+}
+
+.category-container:hover {
+    background-color: ghostwhite;
+    cursor: pointer;
+}

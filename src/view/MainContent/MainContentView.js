@@ -18,7 +18,7 @@ export default class MainContentView extends Component{
     handleCopy= (id) => {
         const { updateCopiedHashtags }= this.props;
         updateCopiedHashtags(id);
-    }  
+    } 
 
     render(){
         const { hashtags, categoryHashtags, copiedHashtags } = this.props;
@@ -27,12 +27,10 @@ export default class MainContentView extends Component{
                 <h3 className="display-5 d-flex justify-content-center"> Top Community HashTags</h3>
                 <div className="container">
                     <div className="row grouped-hashtags-container my-3">
-                        {console.log(categoryHashtags)}
                         <GroupedHashtags hashtags={categoryHashtags} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy}/>
                     </div>
-                    {console.log(hashtags)}
-                    <Categories hashtags={hashtags} copiedHashtags={copiedHashtags}/>
                 </div>
+                <Categories categories={hashtags}/>
             </div>
         );
         }

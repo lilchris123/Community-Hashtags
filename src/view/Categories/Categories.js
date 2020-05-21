@@ -2,24 +2,24 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import './Categories.scss';
-import GroupedHashtags from '../GroupedHashtags/GroupedHashtags';
+import Category from '../Category/Category';
 
 const Categories = (props) => {
-    const { hashtags, copiedHashtags }= props;
+    const { categories }= props;
     return ( 
         <>
-            <h3 className='display-5 d-flex justify-content-center'>Categories</h3>
-            {hashtags.map((h,i) =>{
-                return <GroupedHashtags key={i} hashtags={ h.tags } copiedHashtags={ copiedHashtags }/>
-            })}   
+            <h3 className='d-flex justify-content-center'>Categories</h3>
+            <div className='container'>
+                <div className='row categories-container'>
+                    { categories.map((c,i) =>
+                    <Category key={i} category={c}/>) }
+                </div>
+            </div>
         </>
     );
 }
 Categories.propTypes= {
-    hashtags: PropTypes.arrayOf(String).isRequired,
-    copiedHashtags: PropTypes.number
+    categories: PropTypes.arrayOf(String).isRequired
 }
-Categories.defaultProps= {
-    copiedHashtags: null
-}
+
 export default Categories;
