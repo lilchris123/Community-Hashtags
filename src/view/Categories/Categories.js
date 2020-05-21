@@ -1,17 +1,25 @@
-import React, { Component } from 'react';
-import './Categories.scss'
+/* eslint-disable react/no-array-index-key */
+import React from 'react';
+import PropTypes from 'prop-types'
+import './Categories.scss';
+import Category from '../Category/Category';
 
-export default class Categories extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-
-    render() { 
-        return ( 
-            <>
-                <h3 className='display-5 d-flex justify-content-center'>Categories</h3>
-            </>
-         );
-    }
+const Categories = (props) => {
+    const { categories }= props;
+    return ( 
+        <>
+            <h3 className='d-flex justify-content-center'>Categories</h3>
+            <div className='container'>
+                <div className='row categories-container'>
+                    { categories.map((c,i) =>
+                    <Category key={i} category={c}/>) }
+                </div>
+            </div>
+        </>
+    );
 }
+Categories.propTypes= {
+    categories: PropTypes.arrayOf(String).isRequired
+}
+
+export default Categories;

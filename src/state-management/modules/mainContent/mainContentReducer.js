@@ -1,9 +1,10 @@
 import * as Actions from './mainContentActions';
-import {pending, success, failure} from '../../reduxPromiseActionNames';
+import { pending, success, failure } from '../../reduxPromiseActionNames';
 
 const initialState={
     isLoading: [],
-    topTags: [],
+    hashtags: [],
+    categoryHashtags: [],
     copiedHashtags: null
 }
 
@@ -11,21 +12,37 @@ const mainContentReducer = (state= initialState, action) => {
     const { type, payload }= action;
     
     switch(type){
-        case pending(Actions.FETCH_TOPHASHTAGS):
+        case pending(Actions.FETCH_HASHTAGS):
             return{
                 ...state,
-                isLoading: [...state.isLoading, Actions.FETCH_TOPHASHTAGS]
+                isLoading: [...state.isLoading, Actions.FETCH_HASHTAGS]
             }
-        case success(Actions.FETCH_TOPHASHTAGS):
+        case success(Actions.FETCH_HASHTAGS):
         return{
             ...state,
-            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_TOPHASHTAGS),
-            topTags: payload.data.tags
+            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_HASHTAGS),
+            hashtags: payload.data
         }
-        case failure(Actions.FETCH_TOPHASHTAGS):
+        case failure(Actions.FETCH_HASHTAGS):
         return{
             ...state,
-            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_TOPHASHTAGS)
+            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_HASHTAGS)
+        }
+        case pending(Actions.FETCH_HASHTAGS_BY_NAME):
+            return{
+                ...state,
+                isLoading: [...state.isLoading, Actions.FETCH_HASHTAGS_BY_NAME]
+            }
+        case success(Actions.FETCH_HASHTAGS_BY_NAME):
+        return{
+            ...state,
+            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_HASHTAGS_BY_NAME),
+            categoryHashtags: payload.data.tags
+        }
+        case failure(Actions.FETCH_HASHTAGS_BY_NAME):
+        return{
+            ...state,
+            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_HASHTAGS_BY_NAME)
         }
         case pending(Actions.COPIED_HASHTAGS):
             return{

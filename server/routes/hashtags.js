@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const TagsCollection= require('../model/hashtags');
+const HashtagsCollection= require('../model/hashtags');
 
-router.route('/topHashtags').get((req,res)=>{
-    TagsCollection.findOne()
+router.route('/hashtags').get((req,res)=>{
+    HashtagsCollection.find()
     .then(data => res.json(data))
     .catch(err => res.status(400).json(`Error ${err}`));
 })
@@ -11,7 +11,7 @@ router.route('/topHashtags').get((req,res)=>{
     const collectionName= req.body.name;
     const { tags } = req.body;
 
-    const newCollection = new TagsCollection({
+    const newCollection = new HashtagsCollection({
         'name': collectionName,
         'tags': tags
     });
@@ -22,9 +22,15 @@ router.route('/topHashtags').get((req,res)=>{
 })
 
 .delete((req, res)=>{
-    TagsCollection.findOneAndDelete({name: 'popular'})
+    HashtagsCollection.findOneAndDelete({name: 'popular'})
     .then(()=> res.json('deleted from DB'))
     .catch((err)=> res.status(400).json(`Error ${err}`));
+});
+
+router.get('/hashtags/:category',(req,res) => {
+    HashtagsCollection.findOne({name: req.params.category})
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json(`Error ${err}`));
 })
 
 module.exports= router;

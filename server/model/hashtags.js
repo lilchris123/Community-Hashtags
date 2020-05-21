@@ -8,11 +8,11 @@ const mongoose = require("mongoose");
 //   tags: [String]
 // });
 
-const tagsCollectionSchema = mongoose.Schema({
+const hashtagsCollectionSchema = mongoose.Schema({
   name: String,
   tags: [[String]]
 });
 
-const tagsCollection = mongoose.model("tagsCollection", tagsCollectionSchema);
+const hashtagsCollection = mongoose.model("tagsCollection", hashtagsCollectionSchema);
 
-module.exports = tagsCollection;
+module.exports = hashtagsCollection;
