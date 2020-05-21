@@ -11,4 +11,5 @@ Node- Backend server
 Express- Routing framework for Node
 Mongodb- Database
 Eslint- Code style (Airbnb)
+Scss- UI Styling
 
