@@ -1,10 +1,10 @@
-export const FETCH_HASHTAGS= 'FETCH_HASHTAGS';
+export const FETCH_CATEGORIES= 'FETCH_CATEGORIES';
 export const FETCH_HASHTAGS_BY_NAME= 'FETCH_HASHTAGS_BY_NAME';
 export const COPIED_HASHTAGS= 'COPIED_HASHTAGS';
 
-export const fetchHashtags = () => {
+export const fetchCategories = () => {
     return{
-        type: FETCH_HASHTAGS
+        type: FETCH_CATEGORIES
     }
 }
 

@@ -3,15 +3,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './MainContent.scss';
-import GroupedHashtags from '../GroupedHashtags/GroupedHashtags';
+import Category from '../GroupedHashtags/Category';
 import Categories from '../Categories/Categories';
 
 export default class MainContentView extends Component{
 
     // fetch all the hashtags after mounting the component
     componentDidMount(){
-        const { fetchHashtags, fetchHashtagsByCategory }= this.props;
-        fetchHashtags();
+        const { fetchCategories, fetchHashtagsByCategory }= this.props;
+        fetchCategories();
         fetchHashtagsByCategory('popular');
     }
 
@@ -21,25 +21,27 @@ export default class MainContentView extends Component{
     } 
 
     render(){
-        const { hashtags, categoryHashtags, copiedHashtags } = this.props;
+        const { categories, categoryData, copiedHashtags } = this.props;
         return(
             <div className="m-5">
-                <h3 className="display-5 d-flex justify-content-center"> Top Community HashTags</h3>
+                <h3 className="display-5 d-flex justify-content-center"> Top HashTags</h3>
                 <div className="container">
                     <div className="row grouped-hashtags-container my-3">
-                        <GroupedHashtags hashtags={categoryHashtags} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy}/>
+                        {console.log(categoryData)}
+                        <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy}/>
                     </div>
                 </div>
-                <Categories categories={hashtags}/>
+                {console.log(categories)}
+                <Categories categories={categories}/>
             </div>
         );
         }
 }
 MainContentView.propTypes={
-    hashtags: PropTypes.arrayOf(String).isRequired,
-    categoryHashtags: PropTypes.arrayOf(String).isRequired,
+    categories: PropTypes.arrayOf(String).isRequired,
+    categoryData: PropTypes.shape().isRequired,
     copiedHashtags: PropTypes.number,
-    fetchHashtags: PropTypes.func.isRequired,
+    fetchCategories: PropTypes.func.isRequired,
     fetchHashtagsByCategory: PropTypes.func.isRequired,
     updateCopiedHashtags: PropTypes.func.isRequired
 }
