@@ -1,21 +1,19 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Post from '../Hashtags/Post';
+import Post from '../Post/Post';
 
 const Category = (props) => {
      // function to list the hash tags
     const { category, copiedHashtags, handleCopy } =props;
-    console.log(category)
     if(category.posts)
         return category.posts.map((p, i) =>
-            <Post post={p} index={i} key={i} isCopied={ i === copiedHashtags } onCopy={handleCopy}/>
+            <Post post={p} index={i} key={p.id} isCopied={ p.id === copiedHashtags } onCopy={handleCopy}/>
         );
     return null;
 }
 Category.propTypes ={
     category: PropTypes.shape().isRequired,
-    copiedHashtags: PropTypes.number,
+    copiedHashtags: PropTypes.string,
     handleCopy: PropTypes.func
 }
 Category.defaultProps ={

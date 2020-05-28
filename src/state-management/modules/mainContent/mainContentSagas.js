@@ -6,9 +6,7 @@ import * as Actions from './mainContentActions';
 function* fetchCategories(){
     yield put({type: pending(Actions.FETCH_CATEGORIES)});
     try{
-          const data = yield call(axios.get,'http://localhost:8081/api/data/category');
-          console.log(data);
-        
+        const data = yield call(axios.get,'http://localhost:8081/api/data/category');
         yield put({type: success(Actions.FETCH_CATEGORIES), payload: data});
     }catch(err){
         yield put({type: failure(Actions.FETCH_CATEGORIES), payload: err})
@@ -19,8 +17,7 @@ function* fetchHashtagsByCategory(action){
     const { category } =action;
     yield put({type: pending(Actions.FETCH_HASHTAGS_BY_NAME)});
     try{
-          const data = yield call(axios.get,`http://localhost:8081/api/data/category/${category}`);
-          console.log(data);
+        const data = yield call(axios.get,`http://localhost:8081/api/data/category/${category}`);
         yield put({type: success(Actions.FETCH_HASHTAGS_BY_NAME), payload: data});
     }catch(err){
         yield put({type: failure(Actions.FETCH_HASHTAGS_BY_NAME), payload: err})

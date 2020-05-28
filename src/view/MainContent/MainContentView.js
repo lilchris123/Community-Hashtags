@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './MainContent.scss';
-import Category from '../GroupedHashtags/Category';
-import Categories from '../Categories/Categories';
+import Category from '../../shared/components/Category/Category';
+import CategoriesContainer from '../Categories/CategoriesContainer';
 
 export default class MainContentView extends Component{
 
@@ -21,7 +21,7 @@ export default class MainContentView extends Component{
     } 
 
     render(){
-        const { categories, categoryData, copiedHashtags } = this.props;
+        const { categoryData, copiedHashtags } = this.props;
         return(
             <div className="m-5">
                 <h3 className="display-5 d-flex justify-content-center"> Top HashTags</h3>
@@ -31,16 +31,14 @@ export default class MainContentView extends Component{
                         <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy}/>
                     </div>
                 </div>
-                {console.log(categories)}
-                <Categories categories={categories}/>
+                <CategoriesContainer/>
             </div>
         );
         }
 }
 MainContentView.propTypes={
-    categories: PropTypes.arrayOf(String).isRequired,
     categoryData: PropTypes.shape().isRequired,
-    copiedHashtags: PropTypes.number,
+    copiedHashtags: PropTypes.string,
     fetchCategories: PropTypes.func.isRequired,
     fetchHashtagsByCategory: PropTypes.func.isRequired,
     updateCopiedHashtags: PropTypes.func.isRequired
