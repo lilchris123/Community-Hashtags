@@ -24,10 +24,10 @@ mongoose.connect(MONGODB_URI, {
 app.use(bodyParser.json(),cors(), morgan('short'));
 
 // const usersRouter= require('./routes/users');
-const hashtagRouter= require('./routes/hashtags');
+const categoryRouter= require('./routes/category');
 
 // pp.use('/users', usersRouter);
-app.use('/api/data', hashtagRouter);
+app.use('/api/data', categoryRouter);
 
 // catch any invalid requests
 app.all('*', (req,res)=>{

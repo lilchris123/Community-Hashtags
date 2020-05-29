@@ -3,8 +3,8 @@ import { pending, success, failure } from '../../reduxPromiseActionNames';
 
 const initialState={
     isLoading: [],
-    hashtags: [],
-    categoryHashtags: [],
+    categories: [],
+    categoryData: {},
     copiedHashtags: null
 }
 
@@ -12,21 +12,21 @@ const mainContentReducer = (state= initialState, action) => {
     const { type, payload }= action;
     
     switch(type){
-        case pending(Actions.FETCH_HASHTAGS):
+        case pending(Actions.FETCH_CATEGORIES):
             return{
                 ...state,
-                isLoading: [...state.isLoading, Actions.FETCH_HASHTAGS]
+                isLoading: [...state.isLoading, Actions.FETCH_CATEGORIES]
             }
-        case success(Actions.FETCH_HASHTAGS):
+        case success(Actions.FETCH_CATEGORIES):
         return{
             ...state,
-            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_HASHTAGS),
-            hashtags: payload.data
+            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_CATEGORIES),
+            categories: payload.data
         }
-        case failure(Actions.FETCH_HASHTAGS):
+        case failure(Actions.FETCH_CATEGORIES):
         return{
             ...state,
-            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_HASHTAGS)
+            isLoading: state.isLoading.filter(item => item !== Actions.FETCH_CATEGORIES)
         }
         case pending(Actions.FETCH_HASHTAGS_BY_NAME):
             return{
@@ -37,7 +37,7 @@ const mainContentReducer = (state= initialState, action) => {
         return{
             ...state,
             isLoading: state.isLoading.filter(item => item !== Actions.FETCH_HASHTAGS_BY_NAME),
-            categoryHashtags: payload.data.tags
+            categoryData: payload.data
         }
         case failure(Actions.FETCH_HASHTAGS_BY_NAME):
         return{
