@@ -8,13 +8,9 @@ router.route('/category').get((req,res)=>{
 })
 
 .post((req, res)=>{
-    const categoryName= req.body.name;
-    const { posts } = req.body;
+    const { name, posts } = req.body;
 
-    const newCategory = new Category({
-        'name': categoryName,
-        'posts': posts,
-    });
+    const newCategory = new Category({ name, posts });
 
     newCategory.save()
     .then(()=> res.json('new Category added!'))
@@ -22,13 +18,13 @@ router.route('/category').get((req,res)=>{
 })
 
 .delete((req, res)=>{
-    Category.findOneAndDelete({name: 'popular'})
+    Category.findOneAndDelete({ name: 'popular' })
     .then(()=> res.json('deleted from DB'))
     .catch((err)=> res.status(400).json(`Error ${err}`));
 });
 
-router.get('/category/:category',(req,res) => {
-    Category.findOne({name: req.params.category})
+router.get('/category/:category', (req,res) => {
+    Category.findOne({ name: req.params.category })
     .then(data => res.json(data))
     .catch(err => res.status(400).json(`Error ${err}`));
 })
