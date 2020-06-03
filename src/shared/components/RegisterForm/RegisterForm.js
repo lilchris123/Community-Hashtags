@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
+import PropTypes from 'prop-types';
 import {
   Form,
   Col,
@@ -11,9 +12,13 @@ import {
 } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import {useHistory} from 'react-router-dom';
 import "./RegisterForm.scss";
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
+  const {registerUser} =props
+  const history= useHistory();
+
   const validationRegisterSchema = Yup.object({
     firstName: Yup.string()
       .max(50, "Only 50 characters allowed")
@@ -43,10 +48,9 @@ const RegisterForm = () => {
       }}
       validationSchema={validationRegisterSchema}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+          registerUser(values);
           setSubmitting(false);
-        }, 2000);
+          history.push('/login');
       }}
     >
       {(formik) => (
@@ -140,4 +144,11 @@ const RegisterForm = () => {
   );
 };
 
+RegisterForm.propTypes ={
+  registerUser: PropTypes.func.isRequired,
+  user: PropTypes.shape()
+}
+RegisterForm.defaultProps ={
+  user: {}
+}
 export default RegisterForm;

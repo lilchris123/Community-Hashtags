@@ -7,6 +7,7 @@ import LoginContainer from './view/Login/LoginContainer';
 import RegisterContainer from './view/Register/RegisterContainer';
 import CategoriesContainer from './view/Categories/CategoriesContainer';
 import CategoryPageContainer from "./view/CategoryPage/CategoryPageContainer";
+import Registered from './shared/components/Registered/Registered';
 
 function App(){
   return(
@@ -21,6 +22,7 @@ function App(){
       <Route path='/login' component={LoginContainer}/>
       <Route path='/register' component={RegisterContainer}/>
       <Route path='/category/:category' component={CategoryPageContainer}/>
+      <Route path='/thankyou' component={Registered}/>
       </Switch>
       
       <footer className="footer d-flex justify-content-center align-content-end">

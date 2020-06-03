@@ -19,8 +19,13 @@ router.route('/login').post( (req, res) => {
 })
 
 router.route('/register').post( async (req,res) => {
+
     const { firstName, lastName, email, username, password} = req.body;
-    const hashedPassword= await bcrypt.hash(password, 10);
+    let hashedPassword;
+    try{
+        hashedPassword= await bcrypt.hash(password, 10);
+    }catch(err){ return res.status(400).send('Password field empty')}
+    
     const newUser= new Users({
         firstName, 
         lastName, 
@@ -30,7 +35,7 @@ router.route('/register').post( async (req,res) => {
         role: 'USER',
         likedContent: []
     });
-    newUser.save()
+    return newUser.save()
     .then((data) => res.status(201).json(data))
     .catch(err => res.status(500).json(`Failed to register user ${err}`));
 })
