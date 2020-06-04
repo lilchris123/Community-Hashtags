@@ -14,4 +14,10 @@ function authenticateToken(req, res, next){
     });
 }
 
-module.exports= authenticateToken;
+function authenticateAdmin(req, res, next){
+    if(req.user.role !== 'ADMIN') 
+        return res.sendStatus(403);
+    return next();
+}
+
+module.exports= {authenticateToken, authenticateAdmin};
