@@ -25,10 +25,12 @@ mongoose.connect(MONGODB_URI, {
 app.use(bodyParser.json(),cors(), morgan('short'));
 
 const usersRouter= require('./routes/users');
-const categoryRouter= require('./routes/category');
+const categoriesRouter= require('./routes/categories');
+const postsRouter= require('./routes/posts');
 
 app.use('/users', usersRouter);
-app.use('/api/data', categoryRouter);
+app.use('/categories', categoriesRouter);
+app.use('/posts', postsRouter);
 
 // catch any invalid requests
 app.all('*', (req, res)=>{
