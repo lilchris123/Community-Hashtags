@@ -1,4 +1,4 @@
-# Community-Hashtags
+# Social Hashtags
 
 A social website that allows users to share their favorite hashtags with others. It also allows users to like other's post, allowing users to easily find new set of hashtags
 that are relevent to a specific niche.
