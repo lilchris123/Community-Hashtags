@@ -8,19 +8,14 @@ class CategoriesView extends Component {
         fetchCategories();
     }
 
-    handleCopy= (id) => {
-        const { updateCopiedHashtags }= this.props;
-        updateCopiedHashtags(id);
-    } 
-
     render(){
-        const {categories, copiedHashtags}= this.props;
+        const { categories }= this.props;
         return(
             <div className="mainContent">
             <h3 className="display-5 d-flex justify-content-center text-capitalize">List of Categories</h3>
             <div className="container">
                 <div className="row grouped-hashtags-container my-3">
-                    <Categories categories={categories} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy}/>
+                    <Categories categories={categories}/>
                 </div>
             </div>
             </div>
@@ -30,13 +25,7 @@ class CategoriesView extends Component {
 
 CategoriesView.propTypes={
     categories: PropTypes.arrayOf(String).isRequired,
-    copiedHashtags: PropTypes.string,
     fetchCategories: PropTypes.func.isRequired,
-    updateCopiedHashtags: PropTypes.func.isRequired
-}
-
-CategoriesView.defaultProps ={
-    copiedHashtags: null
 }
 
 export default CategoriesView;

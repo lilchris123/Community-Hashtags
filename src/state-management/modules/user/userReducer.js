@@ -4,6 +4,7 @@ import {pending, success, failure} from '../../reduxPromiseActionNames'
 const intialState= {
     isLoading: [],
     user: {},
+    posts: [],
     isLoggedIn: false
 }
 const reducer = (state = intialState, action) => {
@@ -75,6 +76,22 @@ const reducer = (state = intialState, action) => {
             return{
                 ...state,
                 isLoading: state.isLoading.filter(item => item !== Actions.LOGOUT_USER)
+            }
+        case pending(Actions.FETCH_USER_POSTS):
+            return{
+                ...state,
+                isLoading: [state.isLoading, Actions.FETCH_USER_POSTS]
+            }
+        case success(Actions.FETCH_USER_POSTS):
+            return{
+                ...state,
+                isLoading: state.isLoading.filter(item => item !== Actions.FETCH_USER_POSTS),
+                posts: payload.data
+            }
+        case failure(Actions.FETCH_USER_POSTS):
+            return{
+                ...state,
+                isLoading: state.isLoading.filter(item => item !== Actions.FETCH_USER_POSTS)
             }
     default:
         return state;

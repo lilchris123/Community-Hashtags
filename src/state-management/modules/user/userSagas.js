@@ -50,6 +50,16 @@ function* logoutUser(){
     }
 }
 
+function* fetchUserPosts(){
+    yield put({type:pending(Actions.FETCH_USER_POSTS)});
+    try{
+        const data= yield call(axios.get, 'http://localhost:8081/users/posts');
+        yield put({type: success(Actions.FETCH_USER_POSTS), payload: data});
+    }catch(err){
+         yield put({type: failure(Actions.FETCH_USER_POSTS), payload: err});
+    }
+}
 export default function* userRootSaga(){
-    yield all([takeEvery(Actions.USER_FROM_TOKEN, getUserFromToken), takeEvery(Actions.LOGIN_USER, loginUser), takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.LOGOUT_USER, logoutUser)]);
+    yield all([takeEvery(Actions.USER_FROM_TOKEN, getUserFromToken), takeEvery(Actions.LOGIN_USER, loginUser),
+         takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.LOGOUT_USER, logoutUser), takeEvery(Actions.FETCH_USER_POSTS, fetchUserPosts)]);
 }

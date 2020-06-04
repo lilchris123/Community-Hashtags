@@ -7,7 +7,7 @@ const CategoryLink = (props) => {
     const { category } = props;
     return ( 
     <div className='category-container col m-2'>
-        <Link className='' to= {`/category/${category.name}`}> {category.name}</Link>
+        <Link className='' to= {`/category/${category.category}`}> {category.category}</Link>
     </div> );
 }
  CategoryLink.propTypes = {
