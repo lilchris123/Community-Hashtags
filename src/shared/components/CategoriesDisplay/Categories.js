@@ -5,7 +5,7 @@ import "./Categories.scss";
 import CategoryLink from "../CategoryLink/CategoryLink";
 
 const Categories = (props) => {
-  const { categories, copiedHashtags, handleCopy } = props;
+  const { categories } = props;
   return (
     <>
       {categories ? (
@@ -15,8 +15,6 @@ const Categories = (props) => {
               <CategoryLink
                 key={c._id}
                 category={c}
-                copiedHashtags={copiedHashtags}
-                handleCopy={handleCopy}
               />
             ))}
           </div>
@@ -28,12 +26,7 @@ const Categories = (props) => {
   );
 };
 Categories.propTypes = { 
-  categories: PropTypes.arrayOf(String).isRequired,
-  copiedHashtags: PropTypes.string,
-  handleCopy: PropTypes.func.isRequired
+  categories: PropTypes.arrayOf(String).isRequired
 };
 
-Categories.defaultProps ={
-    copiedHashtags: null
-}
 export default Categories;

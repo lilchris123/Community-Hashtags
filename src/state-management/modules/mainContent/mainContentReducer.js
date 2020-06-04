@@ -5,7 +5,7 @@ const initialState={
     isLoading: [],
     categories: [],
     categoryData: {},
-    copiedHashtags: null
+    copiedHashtags: null,
 }
 
 const mainContentReducer = (state= initialState, action) => {

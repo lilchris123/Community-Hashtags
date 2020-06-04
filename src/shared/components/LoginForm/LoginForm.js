@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from "react";
+import PropTypes from 'prop-types';
 import {
   Form,
   Col,
@@ -12,9 +13,10 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
-import "./LoginForm.scss";
+import style from "./LoginForm.module.scss";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+  const {loginUser} = props;
   const history = useHistory();
 
   const handleSignUp = () => {
@@ -39,14 +41,14 @@ const LoginForm = () => {
       }}
       validationSchema={validationLoginSchema}
       onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+          const {username, password}= values;
+          loginUser({username, password});
           setSubmitting(false);
-        }, 2000);
+          history.push('/');
       }}
     >
       {(formik) => (
-        <Form onSubmit={formik.handleSubmit} className="form pl-5 py-2">
+        <Form onSubmit={formik.handleSubmit} className={style.form}>
           <FormGroup controlId="username">
             <FormLabel>Username</FormLabel>
             <Col sm={8}>
@@ -85,7 +87,7 @@ const LoginForm = () => {
                 Login
               </Button>
             </Col>
-            <Col xs={10}>
+            <Col>
               <Button
                 type="button"
                 variant="light"
@@ -100,5 +102,9 @@ const LoginForm = () => {
     </Formik>
   );
 };
+
+LoginForm.propTypes={
+  loginUser: PropTypes.func.isRequired
+}
 
 export default LoginForm;

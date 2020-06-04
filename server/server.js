@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 // server/server.js
+require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const mongoose =require('mongoose');
@@ -17,20 +18,22 @@ const MONGODB_URI= process.env.MONGODB_URI || 'mongodb+srv://lilchris:Chris123@c
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(()=> console.log('DB Connected'))
-.catch(err=> console.log(`DB Connection Error: ${err.reason}`));
+}).then(() => console.log('DB Connected'))
+.catch(err => console.log(`DB Connection Error: ${err.reason}`));
 
 // use cors, morgan & body parser middlewares
 app.use(bodyParser.json(),cors(), morgan('short'));
 
-// const usersRouter= require('./routes/users');
-const categoryRouter= require('./routes/category');
+const usersRouter= require('./routes/users');
+const categoriesRouter= require('./routes/categories');
+const postsRouter= require('./routes/posts');
 
-// pp.use('/users', usersRouter);
-app.use('/api/data', categoryRouter);
+app.use('/users', usersRouter);
+app.use('/categories', categoriesRouter);
+app.use('/posts', postsRouter);
 
 // catch any invalid requests
-app.all('*', (req,res)=>{
+app.all('*', (req, res)=>{
     console.log('Returning a 404 from catch all route');
     return res.sendStatus(404);
 });
@@ -41,5 +44,3 @@ app.all('*', (req,res)=>{
 app.listen(PORT, ()=>{
     console.log(`Community-Hashtag server up on port: ${PORT}`);
 });
-
-

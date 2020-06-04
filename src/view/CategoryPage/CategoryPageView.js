@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Category from '../../shared/components/Category/Category';
+// import style from './CategoryPage.module.scss';
 
 class CategoryPageView extends Component{
     componentDidMount(){
@@ -16,7 +17,7 @@ class CategoryPageView extends Component{
     render(){
         const {categoryData, copiedHashtags} =this.props;
         return(
-        <div className="m-5">
+        <div className="mainContent">
         <h3 className="display-5 d-flex justify-content-center text-capitalize"> {categoryData.name}</h3>
         <div className="container">
             <div className="row grouped-hashtags-container my-3">
