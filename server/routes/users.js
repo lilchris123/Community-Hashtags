@@ -1,7 +1,10 @@
+/* eslint-disable no-underscore-dangle */
 const router= require('express').Router();
 const jwt= require('jsonwebtoken');
 const bcrypt= require('bcrypt');
 const Users= require('../model/user');
+const Post= require('../model/post');
+const { authenticateToken, authenticateAdmin }= require('../middleware/auth-middleware');
 
 router.route('/login').post( (req, res) => {
     const { username, password } = req.body;
@@ -40,10 +43,38 @@ router.route('/register').post( async (req,res) => {
     .catch(err => res.status(500).json(`Failed to register user ${err}`));
 })
 
-router.route('/').get((req,res)=>{
+router.route('/').get([authenticateToken, authenticateAdmin],(req,res)=>{
     Users.find().then(users => res.json(users))
     .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
+router.route('/posts').get(authenticateToken,(req,res)=>{
+    Post.find({createdBy: req.user._id}).then(posts => res.json(posts))
+    .catch(err => res.status(400).json(`Error: ${err}`));
 })
+
+.post(authenticateToken,(req,res)=>{
+    const { hashtags, likes, description, likedBy, category} = req.body;
+    const newPost= new Post({
+        createdBy: req.user.username,
+        hashtags,
+        likes,
+        description,
+        likedBy,
+        category
+    });
+
+    newPost.save().then(()=> res.json('New Post Created')).catch(err=> res.status(400).json(`Error ${err}`));
+
+})
+
+.delete(authenticateToken,(req, res)=>{
+    Post.findOneAndDelete({
+        createdBy: req.user.username, 
+        _id: req.params.id})
+    .then(()=> res.json('deleted from DB'))
+    .catch((err)=> res.status(400).json(`Error ${err}`));
+});
 
 module.exports= router;
 
