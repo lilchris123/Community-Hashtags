@@ -13,7 +13,7 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {useHistory} from 'react-router-dom';
-import "./RegisterForm.scss";
+import style from"./RegisterForm.module.scss";
 
 const RegisterForm = (props) => {
   const {registerUser} =props
@@ -54,11 +54,11 @@ const RegisterForm = (props) => {
       }}
     >
       {(formik) => (
-        <Form onSubmit={formik.handleSubmit} className="form pl-5 py-2">
+        <Form onSubmit={formik.handleSubmit} className={style.form}>
           <Form.Row>
             <FormGroup as={Col} controlId="firstName">
               <FormLabel>First Name</FormLabel>
-              <Col sm={10}>
+              <Col>
                 <FormControl
                   name="firstName"
                   type="text"
@@ -73,7 +73,7 @@ const RegisterForm = (props) => {
 
             <FormGroup controlId="lastName">
               <FormLabel>Last Name</FormLabel>
-              <Col sm={10}>
+              <Col>
                 <FormControl
                   name="lastName"
                   type="text"

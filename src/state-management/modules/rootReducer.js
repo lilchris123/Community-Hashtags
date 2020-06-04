@@ -1,12 +1,10 @@
 import { combineReducers } from 'redux';
 import { mainContentReducer } from './mainContent';
-import { registerReducer} from './register';
-import { loginReducer} from './login';
+import { userReducer} from './user';
 
 const appReducer = combineReducers({
     mainContent: mainContentReducer,
-    register: registerReducer,
-    login: loginReducer
+    user: userReducer
 });
 
 export default function(state, action) {

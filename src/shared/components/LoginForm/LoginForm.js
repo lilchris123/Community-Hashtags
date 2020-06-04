@@ -13,7 +13,7 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
-import "./LoginForm.scss";
+import style from "./LoginForm.module.scss";
 
 const LoginForm = (props) => {
   const {loginUser} = props;
@@ -48,7 +48,7 @@ const LoginForm = (props) => {
       }}
     >
       {(formik) => (
-        <Form onSubmit={formik.handleSubmit} className="form pl-5 py-2">
+        <Form onSubmit={formik.handleSubmit} className={style.form}>
           <FormGroup controlId="username">
             <FormLabel>Username</FormLabel>
             <Col sm={8}>
@@ -87,7 +87,7 @@ const LoginForm = (props) => {
                 Login
               </Button>
             </Col>
-            <Col xs={10}>
+            <Col>
               <Button
                 type="button"
                 variant="light"

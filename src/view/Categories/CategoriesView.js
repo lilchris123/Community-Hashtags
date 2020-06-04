@@ -16,7 +16,7 @@ class CategoriesView extends Component {
     render(){
         const {categories, copiedHashtags}= this.props;
         return(
-            <div className="m-5">
+            <div className="mainContent">
             <h3 className="display-5 d-flex justify-content-center text-capitalize">List of Categories</h3>
             <div className="container">
                 <div className="row grouped-hashtags-container my-3">

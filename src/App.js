@@ -1,19 +1,21 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import "./App.css";
-import Nav from "./view/Nav/Nav";
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import style from "./App.module.scss";
+import NavContainer from "./view/Nav/NavContainer";
 import MainContentContainer from './view/MainContent/MainContentContainer';
 import LoginContainer from './view/Login/LoginContainer';
 import RegisterContainer from './view/Register/RegisterContainer';
 import CategoriesContainer from './view/Categories/CategoriesContainer';
 import CategoryPageContainer from "./view/CategoryPage/CategoryPageContainer";
 import Registered from './shared/components/Registered/Registered';
+import MyPageContainer from './view/MyPage/MyPageContainer';
+// import NotFound from './shared/components/NotFound/NotFound';
 
 function App(){
   return(
     <Router>
       <header>
-        <Nav/>
+        <NavContainer/>
       </header>
       
       <Switch>
@@ -23,9 +25,11 @@ function App(){
       <Route path='/register' component={RegisterContainer}/>
       <Route path='/category/:category' component={CategoryPageContainer}/>
       <Route path='/thankyou' component={Registered}/>
+      <Route patch='/mypage' component={MyPageContainer}/>
+      <Redirect path='*' to='/' component={MainContentContainer}/>
       </Switch>
       
-      <footer className="footer d-flex justify-content-center align-content-end">
+      <footer className={`${style.footer} d-flex justify-content-center align-content-end`}>
         <p>Copyright © 2020 Chris Mayol. All Rights Reserved.</p>
       </footer>
     </Router>

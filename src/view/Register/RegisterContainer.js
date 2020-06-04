@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
-import * as Actions from '../../state-management/modules/register';
-import * as registerSelector from '../../state-management/modules/register/registerSelectors';
+import * as Actions from '../../state-management/modules/user';
+import * as userSelectors from '../../state-management/modules/user/userSelectors';
 import RegisterView from './RegisterView';
 
 const mapStateToProps= (state) =>{
     return {
-        isLoading: registerSelector.getLoading(state),
-        user: registerSelector.getUser(state)
+        isLoading: userSelectors.getLoading(state),
+        user: userSelectors.getUser(state)
     }
 }
 const mapDispatchToProps = (dispatch) =>{
