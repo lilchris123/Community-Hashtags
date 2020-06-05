@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import * as Actions from '../../state-management/modules/mainContent';
+import * as userSelectors from '../../state-management/modules/user/userSelectors';
 import mainContentSelector from '../../state-management/modules/rootSelector';
 import CategoryPageView from './CategoryPageView';
 
@@ -7,7 +8,8 @@ const mapStateToProps = (state)=> {
     return {
         isLoading: mainContentSelector.getLoading(state),
         categoryData: mainContentSelector.getCategoryData(state),
-        copiedHashtags: mainContentSelector.getCopiedHashtags(state)
+        copiedHashtags: mainContentSelector.getCopiedHashtags(state),
+        user: userSelectors.getUser(state),
     }
 }
 

@@ -1,11 +1,20 @@
 .hashtags-container {
-    height: 200px;
+    height: 24vh;
+    border: 2px solid gray;
+    border-radius: 8px;
+    text-overflow: "hidden";
+  }
+  .hashtags-editable-container {
+    height: 30vh;
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
   }
   .hashtags-container:hover {
     border: 2px solid blue;
+  }
+  .form{
+    margin: 2vh 0vh 4vh 0vh;
   }
   .hashtags-container > p.hashtags {
     border: 1px solid gray;

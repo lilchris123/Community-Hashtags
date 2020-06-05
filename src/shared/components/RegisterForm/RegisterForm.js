@@ -63,13 +63,15 @@ const RegisterForm = (props) => {
                   name="firstName"
                   type="text"
                   placeholder="John"
+                  isValid={formik.touched.firstName && !formik.errors.firstName}
+                  isInvalid={formik.touched.firstName && formik.errors.firstName}
                   {...formik.getFieldProps("firstName")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.firstName}
+                </Form.Control.Feedback>
               </Col>
             </FormGroup>
-            {formik.touched.firstName && formik.errors.firstName ? (
-              <div>{formik.errors.firstName}</div>
-            ) : null}
 
             <FormGroup controlId="lastName">
               <FormLabel>Last Name</FormLabel>
@@ -78,13 +80,15 @@ const RegisterForm = (props) => {
                   name="lastName"
                   type="text"
                   placeholder="Doe"
+                  isValid={formik.touched.lastName && !formik.errors.lastName}
+                  isInvalid={formik.touched.lastName && formik.errors.lastName}
                   {...formik.getFieldProps("lastName")}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.lastName}
+                </Form.Control.Feedback>
               </Col>
             </FormGroup>
-            {formik.touched.lastName && formik.errors.lastName ? (
-              <div>{formik.errors.lastName}</div>
-            ) : null}
           </Form.Row>
 
           <FormGroup controlId="email">
@@ -94,13 +98,15 @@ const RegisterForm = (props) => {
                 name="email"
                 type="email"
                 placeholder="johndoe@gmail.com"
+                isValid={formik.touched.email && !formik.errors.email}
+                  isInvalid={formik.touched.email && formik.errors.email}
                 {...formik.getFieldProps("email")}
               />
+              <Form.Control.Feedback type="invalid">
+                  {formik.errors.email}
+                </Form.Control.Feedback>
             </Col>
           </FormGroup>
-          {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
-          ) : null}
 
           <FormGroup controlId="username">
             <FormLabel>Username</FormLabel>
@@ -109,13 +115,15 @@ const RegisterForm = (props) => {
                 name="username"
                 type="text"
                 placeholder="johndoe1995"
+                isValid={formik.touched.username && !formik.errors.username}
+                isInvalid={formik.touched.username && formik.errors.username}
                 {...formik.getFieldProps("username")}
               />
+              <Form.Control.Feedback type="invalid">
+                  {formik.errors.username}
+            </Form.Control.Feedback>
             </Col>
           </FormGroup>
-          {formik.touched.username && formik.errors.username ? (
-            <div>{formik.errors.username}</div>
-          ) : null}
 
           <FormGroup controlId="password">
             <FormLabel>Password</FormLabel>
@@ -124,13 +132,15 @@ const RegisterForm = (props) => {
                 name="password"
                 type="password"
                 placeholder="password"
+                isValid={formik.touched.password && !formik.errors.password}
+                isInvalid={formik.touched.password && formik.errors.password}
                 {...formik.getFieldProps("password")}
               />
+              <Form.Control.Feedback type="invalid">
+                  {formik.errors.password}
+            </Form.Control.Feedback>
             </Col>
           </FormGroup>
-          {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
-          ) : null}
           
           <Button
             type="submit"

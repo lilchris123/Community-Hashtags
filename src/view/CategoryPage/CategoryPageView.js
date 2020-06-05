@@ -14,14 +14,19 @@ class CategoryPageView extends Component{
         updateCopiedHashtags(id);
     } 
 
+    handleRemove= (id) => {
+        const { removePost }= this.props;
+        removePost(id);
+    }
+
     render(){
-        const {categoryData, copiedHashtags} =this.props;
+        const {categoryData, copiedHashtags, user} =this.props;
         return(
         <div className="mainContent">
         <h3 className="display-5 d-flex justify-content-center text-capitalize"> {categoryData.name}</h3>
         <div className="container">
             <div className="row grouped-hashtags-container my-3">
-                <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy}/>
+                <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy} handleRemove={this.handleRemove} currentUser={user && user.username}/>
             </div>
         </div>
         </div>
@@ -33,9 +38,13 @@ CategoryPageView.propTypes={
     copiedHashtags: PropTypes.string,
     match: PropTypes.shape().isRequired,
     fetchHashtagsByCategory: PropTypes.func.isRequired,
-    updateCopiedHashtags: PropTypes.func.isRequired
+    updateCopiedHashtags: PropTypes.func.isRequired,
+    user: PropTypes.shape(),
+    removePost: PropTypes.func,
 }
 CategoryPageView.defaultProps ={
-    copiedHashtags: null
+    copiedHashtags: null,
+    removePost: () => {},
+    user: {}
 }
 export default CategoryPageView;

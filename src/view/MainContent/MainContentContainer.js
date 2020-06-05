@@ -11,7 +11,8 @@ const mapStateToProps = (state)=> {
         categories: mainContentSelector.getCategories(state),
         categoryData: mainContentSelector.getCategoryData(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state),
-        isLoggedIn: userSelectors.getLoggedIn(state)
+        isLoggedIn: userSelectors.getLoggedIn(state),
+        user: userSelectors.getUser(state)
     }
 }
 

@@ -20,14 +20,19 @@ export default class MainContentView extends Component{
         updateCopiedHashtags(id);
     } 
 
+    handleRemove= (id) => {
+        const { removePost }= this.props;
+        removePost(id);
+    }
+
     render(){
-        const { categoryData, copiedHashtags } = this.props;
+        const { categoryData, copiedHashtags, user } = this.props;
         return(
             <div className='mainContent'>
                 <h3 className="display-5 d-flex justify-content-center"> Top HashTags</h3>
                 <div className="container">
                     <div className="row grouped-hashtags-container my-3">
-                        <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy}/>
+                        <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy} handleRemove={this.handleRemove} currentUser={user && user.username}/>
                     </div>
                 </div>
                 <CategoriesContainer/>
@@ -41,8 +46,12 @@ MainContentView.propTypes={
     fetchCategories: PropTypes.func.isRequired,
     fetchHashtagsByCategory: PropTypes.func.isRequired,
     updateCopiedHashtags: PropTypes.func.isRequired,
-    getUserByToken: PropTypes.func.isRequired
+    getUserByToken: PropTypes.func.isRequired,
+    user: PropTypes.shape(),
+    removePost: PropTypes.func
 }
 MainContentView.defaultProps ={
-    copiedHashtags: null
+    copiedHashtags: null,
+    removePost: () => {},
+    user: {}
 }

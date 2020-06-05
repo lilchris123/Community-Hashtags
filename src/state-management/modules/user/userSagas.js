@@ -51,15 +51,38 @@ function* logoutUser(){
 }
 
 function* fetchUserPosts(){
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
     yield put({type:pending(Actions.FETCH_USER_POSTS)});
     try{
-        const data= yield call(axios.get, 'http://localhost:8081/users/posts');
+        const data= yield call(axios.get, 'http://localhost:8081/users/posts', config);
         yield put({type: success(Actions.FETCH_USER_POSTS), payload: data});
     }catch(err){
          yield put({type: failure(Actions.FETCH_USER_POSTS), payload: err});
     }
 }
+
+function* removePost(action){
+    const { id }= action;
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
+    yield put({type:pending(Actions.REMOVE_POST)});
+    try{
+        yield call(axios.delete, `http://localhost:8081/users/posts/${id}`, config);
+        yield put({type: success(Actions.REMOVE_POST)});
+    }catch(err){
+        yield put({type: failure(Actions.REMOVE_POST), payload: err});
+    }
+}
+
 export default function* userRootSaga(){
     yield all([takeEvery(Actions.USER_FROM_TOKEN, getUserFromToken), takeEvery(Actions.LOGIN_USER, loginUser),
-         takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.LOGOUT_USER, logoutUser), takeEvery(Actions.FETCH_USER_POSTS, fetchUserPosts)]);
+         takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.LOGOUT_USER, logoutUser), takeEvery(Actions.FETCH_USER_POSTS,
+             fetchUserPosts), takeEvery(Actions.REMOVE_POST, removePost)]);
 }

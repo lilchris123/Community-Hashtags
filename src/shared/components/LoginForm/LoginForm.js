@@ -56,13 +56,15 @@ const LoginForm = (props) => {
                 name="username"
                 type="text"
                 placeholder="username"
+                isValid={formik.touched.username && !formik.errors.username}
+                isInvalid={formik.touched.username && formik.errors.username}
                 {...formik.getFieldProps("username")}
               />
+              <Form.Control.Feedback type="invalid">
+                  {formik.errors.username}
+            </Form.Control.Feedback>
             </Col>
           </FormGroup>
-          {formik.touched.username && formik.errors.username ? (
-            <div>{formik.errors.username}</div>
-          ) : null}
 
           <FormGroup controlId="password">
             <FormLabel>Password</FormLabel>
@@ -71,13 +73,15 @@ const LoginForm = (props) => {
                 name="password"
                 type="password"
                 placeholder="password"
+                isValid={formik.touched.password && !formik.errors.password}
+                isInvalid={formik.touched.password && formik.errors.password}
                 {...formik.getFieldProps("password")}
               />
+              <Form.Control.Feedback type="invalid">
+                  {formik.errors.password}
+            </Form.Control.Feedback>
             </Col>
           </FormGroup>
-          {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
-          ) : null}
           <Form.Row>
             <Col>
               <Button

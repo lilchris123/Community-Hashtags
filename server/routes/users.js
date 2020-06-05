@@ -49,7 +49,7 @@ router.route('/').get([authenticateToken, authenticateAdmin],(req,res)=>{
 });
 
 router.route('/posts').get(authenticateToken,(req,res)=>{
-    Post.find({createdBy: req.user._id}).then(posts => res.json(posts))
+    Post.find({createdBy: req.user.username}).then(posts => res.json(posts))
     .catch(err => res.status(400).json(`Error: ${err}`));
 })
 
@@ -68,10 +68,8 @@ router.route('/posts').get(authenticateToken,(req,res)=>{
 
 })
 
-.delete(authenticateToken,(req, res)=>{
-    Post.findOneAndDelete({
-        createdBy: req.user.username, 
-        _id: req.params.id})
+router.route('/posts/:id').delete(authenticateToken,(req, res)=>{
+    Post.findByIdAndDelete({_id: req.params.id})
     .then(()=> res.json('deleted from DB'))
     .catch((err)=> res.status(400).json(`Error ${err}`));
 });
