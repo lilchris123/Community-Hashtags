@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import * as Actions from '../../state-management/modules/mainContent';
+import * as userActions from '../../state-management/modules/user';
 import * as userSelectors from '../../state-management/modules/user/userSelectors';
 import mainContentSelector from '../../state-management/modules/rootSelector';
-import CategoryPageView from './CategoryPageView';
+import PostsPageView from './PostsPageView';
 
 const mapStateToProps = (state)=> {
     return {
@@ -16,8 +17,10 @@ const mapStateToProps = (state)=> {
 const mapDispatchToProps = (dispatch)=> {
     return {
         fetchHashtagsByCategory: (category)=> dispatch(Actions.fetchHashtagsByCategory(category)),
-        updateCopiedHashtags: (id)=> dispatch(Actions.copiedHashtags(id))
+        updateCopiedHashtags: (id)=> dispatch(Actions.copiedHashtags(id)),
+        updatePost: (post) => dispatch(userActions.updatePost(post)),
+        removePost: (id) => dispatch(userActions.removePost(id))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryPageView);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsPageView);

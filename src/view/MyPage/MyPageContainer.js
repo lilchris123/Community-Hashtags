@@ -11,6 +11,7 @@ const mapStateToProps = (state) =>{
         isLoggedIn: userSelectors.getLoggedIn(state),
         posts: userSelectors.getPosts(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state),
+        isLoading: userSelectors.getLoading(state)
     }
 }
 
@@ -20,7 +21,9 @@ const mapDispatchToProps = (dispatch) =>{
         logoutUser: () => dispatch(userActions.logoutUser()),
         updateCopiedHashtags: (id)=> dispatch(mainActions.copiedHashtags(id)),
         fetchUserPosts: () => dispatch(userActions.fetchUserPosts()),
-        removePost: (id) => dispatch(userActions.removePost(id))
+        removePost: (id) => dispatch(userActions.removePost(id)),
+        createPost: (post) => dispatch(userActions.createPost(post)),
+        updatePost: (post) => dispatch(userActions.updatePost(post))
     }
 }
  

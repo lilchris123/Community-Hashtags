@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-import {Button} from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Category from '../../shared/components/Category/Category';
+import PostModal from '../../shared/components/PostModal/PostModal';
 import style from './MyPage.module.scss';
 
 const MyPageView = (props) => {
@@ -28,16 +29,32 @@ const MyPageView = (props) => {
         const { removePost }= props;
         removePost(id);
     }
+    const handleCreate= (post) => {
+        const { createPost }= props;
+        createPost(post);
+    }
+    const handleUpdate= (post) => {
+        const { updatePost }= props;
+        updatePost(post);
+    }
     return ( 
+    <>
+    
     <div className={`mainContent ${style.padding}`}>
         <h1>Welcome {user.username}</h1>
         <div className="container">
             <div className="row grouped-hashtags-container my-3">
-                <Category category={posts} copiedHashtags={copiedHashtags} handleCopy={handleCopy} handleRemove={handleRemove} currentUser={user && user.username}/>
+                <Category category={posts} copiedHashtags={copiedHashtags} handleUpdate={handleUpdate} handleCopy={handleCopy} handleRemove={handleRemove} currentUser={user && user.username}/>
             </div>
          </div>
-        <Button onClick={() => logout()}>Logout</Button>
-    </div> );
+         <div className={style.ButtonGroup}>
+            <Button onClick={() => logout()}>Logout</Button>
+            <PostModal onCreate={handleCreate}/>
+        </div>
+    </div> 
+    
+    </>
+    );
 }
 
 MyPageView.propTypes={
@@ -49,11 +66,12 @@ MyPageView.propTypes={
     copiedHashtags: PropTypes.string,
     fetchUserPosts: PropTypes.func.isRequired,
     posts: PropTypes.shape().isRequired,
-    removePost: PropTypes.func
+    createPost: PropTypes.func.isRequired,
+    updatePost: PropTypes.func.isRequired,
+    removePost: PropTypes.func.isRequired
 }
 MyPageView.defaultProps ={
-    copiedHashtags: null,
-    removePost: () => {}
+    copiedHashtags: null
 }
 
 export default MyPageView;

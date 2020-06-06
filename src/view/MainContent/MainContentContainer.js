@@ -7,7 +7,8 @@ import MainContentView from './MainContentView';
 
 const mapStateToProps = (state)=> {
     return {
-        isLoading: mainContentSelector.getLoading(state),
+        isLoadingMainContent: mainContentSelector.getLoading(state),
+        isLoadingUser: userSelectors.getLoading(state),
         categories: mainContentSelector.getCategories(state),
         categoryData: mainContentSelector.getCategoryData(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state),
@@ -21,7 +22,9 @@ const mapDispatchToProps = (dispatch)=> {
         fetchCategories: ()=> dispatch(mainActions.fetchCategories()),
         fetchHashtagsByCategory: (category)=> dispatch(mainActions.fetchHashtagsByCategory(category)),
         updateCopiedHashtags: (id)=> dispatch(mainActions.copiedHashtags(id)),
-        getUserByToken: () => dispatch(userActions.getUserFromToken())
+        getUserByToken: () => dispatch(userActions.getUserFromToken()),
+        updatePost: (post) => dispatch(userActions.updatePost(post)),
+        removePost: (id) => dispatch(userActions.removePost(id))
     }
 }
 

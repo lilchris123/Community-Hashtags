@@ -27,7 +27,9 @@ export default class MainContentView extends Component{
 
     render(){
         const { categoryData, copiedHashtags, user } = this.props;
+
         return(
+            <>
             <div className='mainContent'>
                 <h3 className="display-5 d-flex justify-content-center"> Top HashTags</h3>
                 <div className="container">
@@ -37,6 +39,7 @@ export default class MainContentView extends Component{
                 </div>
                 <CategoriesContainer/>
             </div>
+            </>
         );
         }
 }

@@ -6,15 +6,13 @@ import CategoriesView from './CategoriesView';
 const mapStateToProps = (state)=> {
     return {
         isLoading: mainContentSelector.getLoading(state),
-        categories: mainContentSelector.getCategories(state),
-        copiedHashtags: mainContentSelector.getCopiedHashtags(state)
+        categories: mainContentSelector.getCategories(state)
     }
 }
 
 const mapDispatchToProps = (dispatch)=> {
     return {
-        fetchCategories: ()=> dispatch(Actions.fetchCategories()),
-        updateCopiedHashtags: (id)=> dispatch(Actions.copiedHashtags(id))
+        fetchCategories: ()=> dispatch(Actions.fetchCategories())
     }
 }
 

@@ -5,87 +5,42 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
 import PropTypes from "prop-types";
-import { Badge, Form, FormGroup, FormControl, Button } from "react-bootstrap";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import "./Post.scss";
+import { Badge, FormGroup, FormControl } from "react-bootstrap";
+import PostModal from '../PostModal/PostModal';
+import style from "./Post.module.scss";
 
 const Post = (props) => {
-  const { post, isCopied, onCopy, onRemove, isEditable } = props;
+  const { post, isCopied, onCopy, handleUpdate, handleCreate, onRemove, currentUser } = props;
+  const isEditable = post.createdBy === currentUser;
   const badgeColor = isCopied === false ? "info" : "danger";
   const copyBtnText = isCopied === false ? "copy" : "copied";
   let isReported = false;
 
-  const validationPostSchema = Yup.object({
-    description: Yup.string()
-      .min(5, "Minimum of 5 characters")
-      .max(100, "Max of 100 characters allowed")
-      .required("Required"),
-    hashtags: Yup.string()
-      .min(2, "Minimum of 2 characters")
-      .max(1000, "Max of 1000 characters allowed")
-      .required("Required")
-      .matches(/((#\w+)\s)+/),
-  });
-
   return (
     <>
-      {isEditable ? (
-        <div className="hashtags-editable-container col m-2">
+        <div className={`${style['hashtags-container']} col m-2`}>
+          { isEditable ?
           <div className="d-flex justify-content-between mt-1">
             <i className="fa fa-user"> {post.createdBy}</i>
-            <Badge variant="primary">editable</Badge>
-          </div>
-          <Formik
-            initialValues={{
-              description: post.description,
-              hashtags: post.hashtags.map((i) => `${i} `),
-            }}
-            validationSchema={validationPostSchema}
-            onSubmit={(values, {setSubmitting}) => {
-              // const { description, hashtags } = values;
-              // updatePost({ username, password });
-              setTimeout(()=>{
-                alert(JSON.stringify(values));
-              },1000);
-              setSubmitting(false);
-            }}
-          >
-            {(formik) => (
-              <Form onSubmit={formik.handleSubmit} className="form">
-                <FormGroup controlId={`description${post._id}`}>
-                  <FormControl 
-                    name={`description${post._id}`} 
-                    size="sm" 
-                    type="text"
-                    isValid={formik.touched.description && !formik.errors.description}
-                    isInvalid={formik.touched.description && formik.errors.description}
-                    {...formik.getFieldProps('description')} 
-                    />
-                </FormGroup>
-
-                <FormGroup controlId={`tags${post._id}`}>
+            <PostModal isUpdate onUpdate={handleUpdate} onCreate={handleCreate} post={post}/>
+          </div>  
+          :
+          <i className="fa fa-user"> {post.createdBy}</i>
+          }
+          <p className={style.description}>{post.description}</p>
+      
+          <FormGroup controlId={`tags${post._id}`}>
                   <FormControl
                     name={`tags${post._id}`}
                     size="sm"
-                    type="textarea"
-                    isValid={formik.touched.hashtags && !formik.errors.hashtags}
-                    isInvalid={formik.touched.hashtags && formik.errors.hashtags}
-                    {...formik.getFieldProps('hashtags')}
+                    as="textarea"
+                    rows={3}
+                    value={post.hashtags.map((i) => `${i} `)}
+                    className={style.textarea}
+                    readOnly
                   />
-                </FormGroup>
-                <Button
-                size='sm'
-                type="submit"
-                disabled={formik.isSubmitting || !formik.isValid}
-              >
-                update
-              </Button>
-              </Form>
-            )}
-          </Formik>
-
-          <div className="hashtags-stat-container">
+          </FormGroup>
+          <div className={`${style['hashtags-stat-container']}`}>
             <i className="fa fa-heart"> {post.likes}</i>
             <div>
               <Badge
@@ -95,40 +50,25 @@ const Post = (props) => {
               >
                 {copyBtnText}
               </Badge>
-              <Badge 
-              variant="danger"
-              onClick={() => onRemove(post._id)}
-              >remove</Badge>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="hashtags-container col m-2">
-          <i className="fa fa-user"> {post.createdBy}</i>
-          <p className="description">{post.description}</p>
-          <p className="hashtags">{post.hashtags.map((i) => `${i} `)}</p>
-          <div className="hashtags-stat-container">
-            <i className="fa fa-heart"> {post.likes}</i>
-            <div>
+              {currentUser && !isEditable &&
               <Badge
-                variant={badgeColor}
-                className="mr-2"
-                onClick={() => onCopy(post._id)}
-              >
-                {copyBtnText}
-              </Badge>
-              <Badge
-                variant="danger"
+                variant="warning"
                 onClick={() => {
                   isReported = !isReported;
                 }}
               >
                 {isReported === false ? "report" : "reported"}
               </Badge>
+              }
+              { isEditable &&
+              <Badge 
+              variant="danger"
+              onClick={() => onRemove(post._id)}
+              >remove</Badge>
+              }
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };
@@ -137,13 +77,17 @@ Post.propTypes = {
   post: PropTypes.shape().isRequired,
   isCopied: PropTypes.bool.isRequired,
   onCopy: PropTypes.func,
-  isEditable: PropTypes.bool,
+  currentUser: PropTypes.string,
   onRemove: PropTypes.func,
+  handleUpdate: PropTypes.func,
+  handleCreate: PropTypes.func
 };
 Post.defaultProps = {
   onCopy: () => {},
   onRemove: () => {},
-  isEditable: false,
+  handleUpdate: () => {},
+  handleCreate: () => {},
+  currentUser: null
 };
 
 export default Post;

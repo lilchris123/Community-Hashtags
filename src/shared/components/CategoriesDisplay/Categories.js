@@ -8,25 +8,20 @@ const Categories = (props) => {
   const { categories } = props;
   return (
     <>
-      {categories ? (
+      {categories && (
         <div className="container">
           <div className="row categories-container">
             {categories.map((c, i) => (
-              <CategoryLink
-                key={c._id}
-                category={c}
-              />
+              <CategoryLink key={c._id} category={c} />
             ))}
           </div>
         </div>
-      ) : (
-        <></>
       )}
     </>
   );
 };
-Categories.propTypes = { 
-  categories: PropTypes.arrayOf(String).isRequired
+Categories.propTypes = {
+  categories: PropTypes.arrayOf(String).isRequired,
 };
 
 export default Categories;

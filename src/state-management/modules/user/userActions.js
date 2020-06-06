@@ -4,6 +4,8 @@ export const USER_FROM_TOKEN='USER_FROM_TOKEN';
 export const LOGOUT_USER='LOGOUT_USER';
 export const FETCH_USER_POSTS='FETCH_USER_POSTS';
 export const REMOVE_POST='REMOVE_POST';
+export const CREATE_POST='CREATE_POST';
+export const UPDATE_POST='UPDATE_POST';
 
 export const getUserFromToken= ()=>{
     return{
@@ -41,5 +43,19 @@ export const removePost= (id) =>{
     return{
         type: REMOVE_POST,
         id
+    }
+}
+
+export const createPost= (post) =>{
+    return{
+        type: CREATE_POST,
+        post
+    }
+}
+
+export const updatePost= (post) =>{
+    return{
+        type: UPDATE_POST,
+        post
     }
 }

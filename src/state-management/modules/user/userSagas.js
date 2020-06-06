@@ -5,7 +5,7 @@ import {pending, success, failure} from '../../reduxPromiseActionNames';
 import * as Actions from './userActions';
 
 function* getUserFromToken(){
-    yield put({type:pending(Actions.USER_FROM_TOKEN)});
+    yield put({type: pending(Actions.USER_FROM_TOKEN)});
     try{
         const token = JSON.parse(localStorage.getItem('token'));
         const user= jwt.decode(token);
@@ -81,8 +81,40 @@ function* removePost(action){
     }
 }
 
+function* createPost(action){
+    const { post }= action;
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
+    yield put({type:pending(Actions.CREATE_POST)});
+    try{
+        yield call(axios.post, `http://localhost:8081/users/posts`, {...post}, config);
+        yield put({type: success(Actions.CREATE_POST)});
+    }catch(err){
+        yield put({type: failure(Actions.CREATE_POST), payload: err});
+    }
+}
+
+function* updatePost(action){
+    const { post }= action;
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
+    yield put({type:pending(Actions.UPDATE_POST)});
+    try{
+        yield call(axios.put, `http://localhost:8081/users/posts`, {...post}, config);
+        yield put({type: success(Actions.UPDATE_POST)});
+    }catch(err){
+        yield put({type: failure(Actions.UPDATE_POST), payload: err});
+    }
+}
+
 export default function* userRootSaga(){
     yield all([takeEvery(Actions.USER_FROM_TOKEN, getUserFromToken), takeEvery(Actions.LOGIN_USER, loginUser),
          takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.LOGOUT_USER, logoutUser), takeEvery(Actions.FETCH_USER_POSTS,
-             fetchUserPosts), takeEvery(Actions.REMOVE_POST, removePost)]);
+        fetchUserPosts), takeEvery(Actions.REMOVE_POST, removePost), takeEvery(Actions.CREATE_POST, createPost), takeEvery(Actions.UPDATE_POST, updatePost)]);
 }

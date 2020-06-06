@@ -13,7 +13,7 @@ const reducer = (state = intialState, action) => {
         case pending(Actions.USER_FROM_TOKEN):
             return{
                 ...state,
-                isLoading: [state.isLoading, Actions.USER_FROM_TOKEN]
+                isLoading: [...state.isLoading, Actions.USER_FROM_TOKEN]
             }
         case success(Actions.USER_FROM_TOKEN):
             return{
@@ -30,7 +30,7 @@ const reducer = (state = intialState, action) => {
         case pending(Actions.LOGIN_USER):
             return{
                 ...state,
-                isLoading: [state.isLoading, Actions.LOGIN_USER]
+                isLoading: [...state.isLoading, Actions.LOGIN_USER]
             }
         case success(Actions.LOGIN_USER):
             return{
@@ -63,7 +63,7 @@ const reducer = (state = intialState, action) => {
         case pending(Actions.LOGOUT_USER):
             return{
                 ...state,
-                isLoading: [state.isLoading, Actions.LOGOUT_USER]
+                isLoading: [...state.isLoading, Actions.LOGOUT_USER]
             }
         case success(Actions.LOGOUT_USER):
             return{
@@ -80,7 +80,7 @@ const reducer = (state = intialState, action) => {
         case pending(Actions.FETCH_USER_POSTS):
             return{
                 ...state,
-                isLoading: [state.isLoading, Actions.FETCH_USER_POSTS]
+                isLoading: [...state.isLoading, Actions.FETCH_USER_POSTS]
             }
         case success(Actions.FETCH_USER_POSTS):
             return{
@@ -96,7 +96,7 @@ const reducer = (state = intialState, action) => {
         case pending(Actions.REMOVE_POST):
             return{
                 ...state,
-                isLoading: [state.isLoading, Actions.REMOVE_POST]
+                isLoading: [...state.isLoading, Actions.REMOVE_POST]
             }
         case success(Actions.REMOVE_POST):
             return{
@@ -108,6 +108,36 @@ const reducer = (state = intialState, action) => {
                 ...state,
                 isLoading: state.isLoading.filter(item => item !== Actions.REMOVE_POST)
             }
+        case pending(Actions.CREATE_POST):
+            return{
+                ...state,
+                isLoading: [...state.isLoading, Actions.CREATE_POST]
+            }
+        case success(Actions.CREATE_POST):
+            return{
+                ...state,
+                isLoading: state.isLoading.filter(item => item !== Actions.CREATE_POST),
+            }
+        case failure(Actions.CREATE_POST):
+            return{
+                ...state,
+                isLoading: state.isLoading.filter(item => item !== Actions.CREATE_POST)
+            }
+            case pending(Actions.UPDATE_POST):
+                return{
+                    ...state,
+                    isLoading: [...state.isLoading, Actions.UPDATE_POST]
+                }
+            case success(Actions.UPDATE_POST):
+                return{
+                    ...state,
+                    isLoading: state.isLoading.filter(item => item !== Actions.UPDATE_POST),
+                }
+            case failure(Actions.UPDATE_POST):
+                return{
+                    ...state,
+                    isLoading: state.isLoading.filter(item => item !== Actions.UPDATE_POST)
+                }
     default:
         return state;
     }
