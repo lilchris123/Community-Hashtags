@@ -13,7 +13,7 @@ import {
 import { Formik } from "formik";
 import * as Yup from "yup";
 import PropTypes from "prop-types";
-// import style from "./PostModal.module.scss";
+import style from "./PostModal.module.scss";
 
 const PostModal = (props) => {
   const { isUpdate, post, onUpdate, onCreate } = props;
@@ -37,11 +37,11 @@ const PostModal = (props) => {
   return (
     <>
       {!isUpdate ? (
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="outline-success" onClick={handleShow}>
           Create Post
         </Button>
       ) : (
-        <Badge variant="primary" onClick={handleShow}>
+        <Badge className={`${style.badge}`} variant="primary" onClick={handleShow}>
           edit
         </Badge>
       )}

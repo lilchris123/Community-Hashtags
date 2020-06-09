@@ -5,7 +5,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
 import PropTypes from "prop-types";
-import { Badge, FormGroup, FormControl } from "react-bootstrap";
+import { Badge, FormGroup, FormControl, Col } from "react-bootstrap";
 import PostModal from '../PostModal/PostModal';
 import style from "./Post.module.scss";
 
@@ -17,8 +17,8 @@ const Post = (props) => {
   let isReported = false;
 
   return (
-    <>
-        <div className={`${style['hashtags-container']} col m-2`}>
+    <Col xs={12} sm={6} >
+        <div className={`${style['hashtags-container']} col my-2`}>
           { isEditable ?
           <div className="d-flex justify-content-between mt-1">
             <i className="fa fa-user"> {post.createdBy}</i>
@@ -32,7 +32,6 @@ const Post = (props) => {
           <FormGroup controlId={`tags${post._id}`}>
                   <FormControl
                     name={`tags${post._id}`}
-                    size="sm"
                     as="textarea"
                     rows={3}
                     value={post.hashtags.map((i) => `${i} `)}
@@ -45,7 +44,7 @@ const Post = (props) => {
             <div>
               <Badge
                 variant={badgeColor}
-                className="mr-2"
+                className={`${style.badge} mr-2`}
                 onClick={() => onCopy(post._id)}
               >
                 {copyBtnText}
@@ -53,6 +52,7 @@ const Post = (props) => {
               {currentUser && !isEditable &&
               <Badge
                 variant="warning"
+                className={`${style.badge}`}
                 onClick={() => {
                   isReported = !isReported;
                 }}
@@ -63,13 +63,14 @@ const Post = (props) => {
               { isEditable &&
               <Badge 
               variant="danger"
+              className={`${style.badge}`}
               onClick={() => onRemove(post._id)}
               >remove</Badge>
               }
             </div>
           </div>
         </div>
-    </>
+    </Col>
   );
 };
 

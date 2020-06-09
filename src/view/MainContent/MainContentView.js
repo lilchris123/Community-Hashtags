@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {Container, Row} from 'react-bootstrap';
 import Category from '../../shared/components/Category/Category';
 import CategoriesContainer from '../Categories/CategoriesContainer';
-// import style from './MainContent.module.scss';
+import style from './MainContent.module.scss';
 
 export default class MainContentView extends Component{
 
@@ -30,15 +31,15 @@ export default class MainContentView extends Component{
 
         return(
             <>
-            <div className='mainContent'>
+            <div className={`${style.content}`}>
                 <h3 className="display-5 d-flex justify-content-center"> Top HashTags</h3>
-                <div className="container">
-                    <div className="row grouped-hashtags-container my-3">
+                <Container>
+                    <Row className="my-3">
                         <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy} handleRemove={this.handleRemove} currentUser={user && user.username}/>
-                    </div>
-                </div>
-                <CategoriesContainer/>
+                    </Row>
+                </Container>
             </div>
+            <CategoriesContainer/>
             </>
         );
         }

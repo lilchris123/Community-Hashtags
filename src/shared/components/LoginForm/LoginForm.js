@@ -51,7 +51,7 @@ const LoginForm = (props) => {
         <Form onSubmit={formik.handleSubmit} className={style.form}>
           <FormGroup controlId="username">
             <FormLabel>Username</FormLabel>
-            <Col sm={8}>
+            <Col>
               <FormControl
                 name="username"
                 type="text"
@@ -68,7 +68,7 @@ const LoginForm = (props) => {
 
           <FormGroup controlId="password">
             <FormLabel>Password</FormLabel>
-            <Col sm={8}>
+            <Col>
               <FormControl
                 name="password"
                 type="password"

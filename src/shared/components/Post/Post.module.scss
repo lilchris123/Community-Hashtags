@@ -1,29 +1,65 @@
-.hashtags-container {
-    height: 24vh;
+@media screen and (max-width: 600px){
+  .hashtags-container {
+    height: 20vh;
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
+    font-size: .5rem;
   }
-  .hashtags-editable-container {
+  .textarea{
+    font-size: .6rem !important;
+    resize: none;
+}
+}
+@media screen and (min-width: 600px){
+  .hashtags-container {
+    height: 25vh;
+    border: 2px solid gray;
+    border-radius: 8px;
+    text-overflow: "hidden";
+    font-size: .8rem;
+  }
+  .textarea{
+    font-size: .9rem !important;
+    resize: none;
+}
+}
+
+@media screen and (min-width: 768px){
+  .hashtags-container {
     height: 30vh;
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
+    font-size: 1rem;
   }
+  .textarea{
+    font-size: 1.2rem !important;
+    resize: none;
+}
+}
+
+@media screen and (min-width: 992px){
+  .hashtags-container {
+    height: 30vh;
+    border: 2px solid gray;
+    border-radius: 8px;
+    text-overflow: "hidden";
+    font-size: 1rem;
+  }
+  .textarea{
+    font-size: 1.2rem !important;
+    resize: none;
+}
+}
+
   .hashtags-container:hover {
     border: 2px solid blue;
   }
   .form{
     margin: 2vh 0vh 4vh 0vh;
   }
-  .hashtags-container > p.hashtags {
-    border: 1px solid gray;
-    padding: 0px 0px 0px 5px;
-    height: 35%;
-  }
-  .hashtags-container > p.description {
-    text-transform: capitalize;
-  }
+  
   .hashtags-stat-container {
     border-top: 1px solid gray;
     padding-top: 2px;
@@ -34,7 +70,3 @@
   .badge:hover {
       cursor: pointer;
   }
-
-  .textarea{
-    resize: none;
-}

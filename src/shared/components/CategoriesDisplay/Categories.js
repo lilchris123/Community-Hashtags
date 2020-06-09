@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from "react";
 import PropTypes from "prop-types";
+import {Container, Row} from 'react-bootstrap'
 import "./Categories.scss";
 import CategoryLink from "../CategoryLink/CategoryLink";
 
@@ -9,13 +10,13 @@ const Categories = (props) => {
   return (
     <>
       {categories && (
-        <div className="container">
-          <div className="row categories-container">
+        <Container className='my-3'>
+          <Row>
             {categories.map((c, i) => (
               <CategoryLink key={c._id} category={c} />
             ))}
-          </div>
-        </div>
+          </Row>
+        </Container>
       )}
     </>
   );

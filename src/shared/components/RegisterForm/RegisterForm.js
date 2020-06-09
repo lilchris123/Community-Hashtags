@@ -56,7 +56,7 @@ const RegisterForm = (props) => {
       {(formik) => (
         <Form onSubmit={formik.handleSubmit} className={style.form}>
           <Form.Row>
-            <FormGroup as={Col} controlId="firstName">
+            <FormGroup as={Col} xs={12} sm={6} controlId="firstName">
               <FormLabel>First Name</FormLabel>
               <Col>
                 <FormControl
@@ -73,7 +73,7 @@ const RegisterForm = (props) => {
               </Col>
             </FormGroup>
 
-            <FormGroup controlId="lastName">
+            <FormGroup as={Col} controlId="lastName">
               <FormLabel>Last Name</FormLabel>
               <Col>
                 <FormControl
@@ -93,7 +93,7 @@ const RegisterForm = (props) => {
 
           <FormGroup controlId="email">
             <FormLabel>Email</FormLabel>
-            <Col sm={8}>
+            <Col md={10}>
               <FormControl
                 name="email"
                 type="email"
@@ -110,7 +110,7 @@ const RegisterForm = (props) => {
 
           <FormGroup controlId="username">
             <FormLabel>Username</FormLabel>
-            <Col sm={8}>
+            <Col md={8}>
               <FormControl
                 name="username"
                 type="text"
@@ -127,7 +127,7 @@ const RegisterForm = (props) => {
 
           <FormGroup controlId="password">
             <FormLabel>Password</FormLabel>
-            <Col sm={8}>
+            <Col md={8}>
               <FormControl
                 name="password"
                 type="password"

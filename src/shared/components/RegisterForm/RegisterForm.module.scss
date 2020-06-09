@@ -1,7 +1,42 @@
-.form{
-    border: solid lightgray 2px;
-    border-radius: 10px;
-    width: 50vw;
-    height: 65vh;
-    padding: 5vh;
+@media screen and (max-width: 600px){
+    .form{
+        border: solid lightgray 2px;
+        border-radius: 10px;
+        width: 50vw;
+        height: 65vh;
+        padding: 3vw;
+        font-size: .8rem !important;
+    }
+}
+
+@media screen and (min-width: 600px){
+    .form{
+        border: solid lightgray 2px;
+        border-radius: 10px;
+        width: 50vw;
+        height: 60vh;
+        padding: 4vh;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .form{
+        border: solid lightgray 2px;
+        border-radius: 10px;
+        width: 55vw;
+        height: 65vh;
+        padding: 4vh;
+        font-size: 1.2rem !important;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .form{
+        border: solid lightgray 2px;
+        border-radius: 10px;
+        width: 55vw;
+        height: 65vh;
+        padding: 5vh;
+        font-size: 1.2rem !important;
+    }
 }
