@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import {Container, Row} from 'react-bootstrap';
 import Category from "../../shared/components/Category/Category";
 // import style from './PostsPage.module.scss';
 
@@ -26,8 +27,8 @@ class PostsPageView extends Component {
         <h3 className="display-5 d-flex justify-content-center text-capitalize">
           {categoryData.name}
         </h3>
-        <div className="container">
-          <div className="row grouped-hashtags-container my-3">
+        <Container>
+          <Row className="my-3">
             <Category
               category={categoryData}
               copiedHashtags={copiedHashtags}
@@ -35,8 +36,8 @@ class PostsPageView extends Component {
               handleRemove={this.handleRemove}
               currentUser={user && user.username}
             />
-          </div>
-        </div>
+          </Row>
+        </Container>
       </div>
     );
   }

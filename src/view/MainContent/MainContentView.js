@@ -26,6 +26,11 @@ export default class MainContentView extends Component{
         removePost(id);
     }
 
+    handleLike= (id) => {
+        const { likePost, user }= this.props;
+        likePost(id, user.username);
+    }
+
     render(){
         const { categoryData, copiedHashtags, user } = this.props;
 
@@ -35,7 +40,7 @@ export default class MainContentView extends Component{
                 <h3 className="display-5 d-flex justify-content-center"> Top HashTags</h3>
                 <Container>
                     <Row className="my-3">
-                        <Category category={categoryData} copiedHashtags={copiedHashtags} handleCopy={this.handleCopy} handleRemove={this.handleRemove} currentUser={user && user.username}/>
+                        <Category category={categoryData} copiedHashtags={copiedHashtags} handleLike={this.handleLike} handleCopy={this.handleCopy} handleRemove={this.handleRemove} currentUser={user && user.username}/>
                     </Row>
                 </Container>
             </div>
@@ -52,10 +57,12 @@ MainContentView.propTypes={
     updateCopiedHashtags: PropTypes.func.isRequired,
     getUserByToken: PropTypes.func.isRequired,
     user: PropTypes.shape(),
+    likePost: PropTypes.func,
     removePost: PropTypes.func
 }
 MainContentView.defaultProps ={
     copiedHashtags: null,
+    likePost: () => {},
     removePost: () => {},
     user: {}
 }

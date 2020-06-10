@@ -8,6 +8,7 @@ import RegisterContainer from './view/Register/RegisterContainer';
 import CategoriesContainer from './view/Categories/CategoriesContainer';
 import PostsPageContainer from "./view/PostsPage/PostsPageContainer";
 import MyPageContainer from './view/MyPage/MyPageContainer';
+import SearchContainer from './view/Search/SearchContainer';
 // import NotFound from './shared/components/NotFound/NotFound';
 
 function App(){
@@ -23,7 +24,8 @@ function App(){
       <Route path='/login' component={LoginContainer}/>
       <Route path='/register' component={RegisterContainer}/>
       <Route path='/category/:category' component={PostsPageContainer}/>
-      <Route patch='/mypage' component={MyPageContainer}/>
+      <Route path='/mypage' component={MyPageContainer}/>
+      <Route path='/search' component={SearchContainer}/>
       <Redirect path='*' to='/' component={MainContentContainer}/>
       </Switch>
       

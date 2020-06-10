@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable no-alert */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-underscore-dangle */
@@ -10,11 +11,16 @@ import PostModal from '../PostModal/PostModal';
 import style from "./Post.module.scss";
 
 const Post = (props) => {
-  const { post, isCopied, onCopy, handleUpdate, handleCreate, onRemove, currentUser } = props;
+  const { post, isCopied, onCopy, onLike, handleUpdate, handleCreate, onRemove, currentUser } = props;
   const isEditable = post.createdBy === currentUser;
   const badgeColor = isCopied === false ? "info" : "danger";
   const copyBtnText = isCopied === false ? "copy" : "copied";
   let isReported = false;
+  
+  const canLike= () =>{
+    if(currentUser)
+      onLike(post._id);
+  }
 
   return (
     <Col xs={12} sm={6} >
@@ -40,7 +46,7 @@ const Post = (props) => {
                   />
           </FormGroup>
           <div className={`${style['hashtags-stat-container']}`}>
-            <i className="fa fa-heart"> {post.likes}</i>
+            <i className="fa fa-heart" role='button' onClick={() => canLike()}> {post.likes}</i>
             <div>
               <Badge
                 variant={badgeColor}
@@ -79,6 +85,7 @@ Post.propTypes = {
   isCopied: PropTypes.bool.isRequired,
   onCopy: PropTypes.func,
   currentUser: PropTypes.string,
+  onLike: PropTypes.func.isRequired,
   onRemove: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleCreate: PropTypes.func
