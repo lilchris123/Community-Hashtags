@@ -27,8 +27,8 @@ export default class MainContentView extends Component{
     }
 
     handleLike= (id) => {
-        const { likePost, user }= this.props;
-        likePost(id, user.username);
+        const { likePost }= this.props;
+        likePost(id);
     }
 
     render(){

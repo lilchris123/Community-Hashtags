@@ -60,6 +60,21 @@ const mainContentReducer = (state= initialState, action) => {
             ...state,
             isLoading: state.isLoading.filter(item => item !== Actions.COPIED_HASHTAGS)
         }
+        case pending(Actions.LIKE_POST):
+            return{
+                ...state,
+                isLoading: [...state.isLoading, Actions.LIKE_POST]
+            }
+        case success(Actions.LIKE_POST):
+        return{
+            ...state,
+            isLoading: state.isLoading.filter(item => item !== Actions.LIKE_POST),
+        }
+        case failure(Actions.LIKE_POST):
+        return{
+            ...state,
+            isLoading: state.isLoading.filter(item => item !== Actions.LIKE_POST)
+        }
         default:
             return state;
     }

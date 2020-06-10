@@ -70,6 +70,6 @@
   .badge:hover {
       cursor: pointer;
   }
-  div.hashtags-stat-container > i:hover{
-    cursor:pointer
+  div.hashtags-stat-container > i.liked{
+    color: rgb(172, 1, 1);
   }

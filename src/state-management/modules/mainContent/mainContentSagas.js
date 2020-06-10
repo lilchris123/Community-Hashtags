@@ -34,6 +34,22 @@ function* copiedHashtags(action){
     }
 }
 
+function* likePost(action){
+    const { postId }= action;
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
+    yield put({type: pending(Actions.LIKE_POST)});
+    try{
+        yield call(axios.put,`http://localhost:8081/posts/like`, { postId }, config);
+        yield put({type: success(Actions.LIKE_POST)});
+    }catch(err){
+        yield put({type: failure(Actions.LIKE_POST), payload: err})
+    }
+}
+
 export default function* mainContentRootSaga(){
-    yield all([takeEvery(Actions.FETCH_CATEGORIES, fetchCategories), takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags)])
+    yield all([takeEvery(Actions.FETCH_CATEGORIES, fetchCategories), takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags), takeEvery(Actions.LIKE_POST, likePost)])
 }

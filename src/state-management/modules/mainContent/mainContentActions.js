@@ -1,6 +1,7 @@
 export const FETCH_CATEGORIES= 'FETCH_CATEGORIES';
 export const FETCH_HASHTAGS_BY_NAME= 'FETCH_HASHTAGS_BY_NAME';
 export const COPIED_HASHTAGS= 'COPIED_HASHTAGS';
+export const LIKE_POST= 'LIKE_POST';
 
 export const fetchCategories = () => {
     return{
@@ -19,5 +20,12 @@ export const copiedHashtags = (id) => {
     return{
         type: COPIED_HASHTAGS,
         tagId: id
+    }
+}
+
+export const likePost = (postId) => {
+    return{
+        type: LIKE_POST,
+        postId
     }
 }
