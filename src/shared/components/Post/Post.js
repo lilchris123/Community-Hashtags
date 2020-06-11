@@ -24,7 +24,7 @@ const Post = (props) => {
   } = props;
   const history = useHistory();
   const isEditable = post.createdBy === currentUser;
-  const badgeColor = isCopied === false ? "info" : "danger";
+  const badgeColor = isCopied === false ? "info" : "success";
   const copyBtnText = isCopied === false ? "copy" : "copied";
   let isReported = false;
 
@@ -93,7 +93,7 @@ const Post = (props) => {
             {currentUser && !isEditable && (
               <Badge
                 variant="warning"
-                className={`${style.badge}`}
+                className={`${style.disabled}`}
                 onClick={() => {
                   isReported = !isReported;
                 }}

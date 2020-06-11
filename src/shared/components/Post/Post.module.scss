@@ -70,6 +70,10 @@
   .badge:hover {
       cursor: pointer;
   }
+
+  .disabled:hover {
+    cursor: not-allowed;
+  }
   div.hashtags-stat-container > i.liked{
     color: rgb(172, 1, 1);
   }
