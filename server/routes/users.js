@@ -64,7 +64,7 @@ router.route('/posts').get(authenticateToken,(req,res)=>{
         category
     });
 
-    newPost.save().then(()=> res.sendStatus(201)).catch(err=> res.status(400).json(`Error ${err}`));
+    newPost.save().then((data)=> res.status(201).json(data)).catch(err=> res.status(400).json(`Error ${err}`));
 
 })
 

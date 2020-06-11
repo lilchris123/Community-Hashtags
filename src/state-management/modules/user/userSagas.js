@@ -75,7 +75,7 @@ function* removePost(action){
     yield put({type:pending(Actions.REMOVE_POST)});
     try{
         yield call(axios.delete, `http://localhost:8081/users/posts/${id}`, config);
-        yield put({type: success(Actions.REMOVE_POST)});
+        yield put({type: success(Actions.REMOVE_POST), payload: id});
     }catch(err){
         yield put({type: failure(Actions.REMOVE_POST), payload: err});
     }
@@ -90,8 +90,8 @@ function* createPost(action){
     }
     yield put({type:pending(Actions.CREATE_POST)});
     try{
-        yield call(axios.post, `http://localhost:8081/users/posts`, {...post}, config);
-        yield put({type: success(Actions.CREATE_POST)});
+       const data= yield call(axios.post, `http://localhost:8081/users/posts`, {...post}, config);
+        yield put({type: success(Actions.CREATE_POST), payload: data});
     }catch(err){
         yield put({type: failure(Actions.CREATE_POST), payload: err});
     }
@@ -107,7 +107,7 @@ function* updatePost(action){
     yield put({type:pending(Actions.UPDATE_POST)});
     try{
         yield call(axios.put, `http://localhost:8081/users/posts`, {...post}, config);
-        yield put({type: success(Actions.UPDATE_POST)});
+        yield put({type: success(Actions.UPDATE_POST), payload: post});
     }catch(err){
         yield put({type: failure(Actions.UPDATE_POST), payload: err});
     }

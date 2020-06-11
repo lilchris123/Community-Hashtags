@@ -6,8 +6,9 @@ import Category from "../../shared/components/Category/Category";
 
 class PostsPageView extends Component {
   componentDidMount() {
-    const { fetchHashtagsByCategory, match } = this.props;
+    const { fetchHashtagsByCategory, getUserByToken, match } = this.props;
     fetchHashtagsByCategory(match.params.category);
+    getUserByToken();
   }
 
   handleCopy = (id) => {
@@ -19,6 +20,11 @@ class PostsPageView extends Component {
     const { removePost } = this.props;
     removePost(id);
   };
+
+  handleLike= (id) => {
+    const { likePost }= this.props;
+    likePost(id);
+  } 
 
   render() {
     const { categoryData, copiedHashtags, user } = this.props;
@@ -32,6 +38,7 @@ class PostsPageView extends Component {
             <Category
               category={categoryData}
               copiedHashtags={copiedHashtags}
+              handleLike={this.handleLike}
               handleCopy={this.handleCopy}
               handleRemove={this.handleRemove}
               currentUser={user && user.username}
@@ -48,11 +55,14 @@ PostsPageView.propTypes = {
   match: PropTypes.shape().isRequired,
   fetchHashtagsByCategory: PropTypes.func.isRequired,
   updateCopiedHashtags: PropTypes.func.isRequired,
+  getUserByToken: PropTypes.func.isRequired,
   user: PropTypes.shape(),
+  likePost: PropTypes.func,
   removePost: PropTypes.func,
 };
 PostsPageView.defaultProps = {
   copiedHashtags: null,
+  likePost: () => {},
   removePost: () => {},
   user: null,
 };

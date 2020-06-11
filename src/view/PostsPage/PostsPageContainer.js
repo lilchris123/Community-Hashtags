@@ -18,6 +18,8 @@ const mapDispatchToProps = (dispatch)=> {
     return {
         fetchHashtagsByCategory: (category)=> dispatch(Actions.fetchHashtagsByCategory(category)),
         updateCopiedHashtags: (id)=> dispatch(Actions.copiedHashtags(id)),
+        getUserByToken: () => dispatch(userActions.getUserFromToken()),
+        likePost: (id) => dispatch(Actions.likePost(id)),
         updatePost: (post) => dispatch(userActions.updatePost(post)),
         removePost: (id) => dispatch(userActions.removePost(id))
     }

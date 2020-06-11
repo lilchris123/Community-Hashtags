@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import * as Actions from './userActions';
 import {pending, success, failure} from '../../reduxPromiseActionNames'
 
@@ -102,6 +103,10 @@ const reducer = (state = intialState, action) => {
             return{
                 ...state,
                 isLoading: state.isLoading.filter(item => item !== Actions.REMOVE_POST),
+                posts: {
+                    ...state.posts,
+                    posts: [...state.posts.posts.filter(p =>p._id !== payload)]
+                }
             }
         case failure(Actions.REMOVE_POST):
             return{
@@ -117,6 +122,10 @@ const reducer = (state = intialState, action) => {
             return{
                 ...state,
                 isLoading: state.isLoading.filter(item => item !== Actions.CREATE_POST),
+                posts: {
+                    ...state.posts,
+                    posts: [...state.posts.posts, payload.data]
+                }
             }
         case failure(Actions.CREATE_POST):
             return{
@@ -132,6 +141,10 @@ const reducer = (state = intialState, action) => {
                 return{
                     ...state,
                     isLoading: state.isLoading.filter(item => item !== Actions.UPDATE_POST),
+                    posts: {
+                        ...state.posts,
+                        posts: [...state.posts.posts.filter(p =>p._id !== payload._id), payload]
+                    }
                 }
             case failure(Actions.UPDATE_POST):
                 return{

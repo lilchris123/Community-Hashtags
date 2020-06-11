@@ -4,10 +4,12 @@ import { Button, Container, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
 import Category from "../../shared/components/Category/Category";
 import PostModal from "../../shared/components/PostModal/PostModal";
+import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
 import style from "./MyPage.module.scss";
 
 const MyPageView = (props) => {
   const {
+    isLoading,
     user,
     isLoggedIn,
     getUserFromToken,
@@ -59,6 +61,9 @@ const MyPageView = (props) => {
             </Col>
           </Row>
         </Container>
+        {isLoading.length > 0 && (
+          <LoadingOverlay />
+        )}
         <Container>
           <Row className="my-3">
             <Category
@@ -77,6 +82,7 @@ const MyPageView = (props) => {
 };
 
 MyPageView.propTypes = {
+  isLoading: PropTypes.arrayOf(String).isRequired,
   user: PropTypes.shape().isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   getUserFromToken: PropTypes.func.isRequired,

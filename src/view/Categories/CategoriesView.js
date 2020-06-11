@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Categories from "../../shared/components/CategoriesDisplay/Categories";
+import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
 import style from './Categories.module.scss';
 
 class CategoriesView extends Component {
@@ -10,12 +11,15 @@ class CategoriesView extends Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories, isLoading } = this.props;
     return (
       <div className={`${style.content}`}>
         <h3 className="display-5 d-flex justify-content-center text-capitalize">
           List of Categories
         </h3>
+        {isLoading.length > 0 && (
+          <LoadingOverlay />
+        )}
         <Categories categories={categories} />
       </div>
     );
@@ -23,6 +27,7 @@ class CategoriesView extends Component {
 }
 
 CategoriesView.propTypes = {
+  isLoading: PropTypes.arrayOf(String).isRequired,
   categories: PropTypes.arrayOf(String).isRequired,
   fetchCategories: PropTypes.func.isRequired,
 };
