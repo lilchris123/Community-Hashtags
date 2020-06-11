@@ -23,7 +23,6 @@
     "mongoose": "^5.9.2",
     "morgan": "^1.9.1",
     "node-sass": "^4.14.1",
-    "nodemon": "^2.0.2",
     "popper.js": "^1.16.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -44,6 +43,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint",
+    "server": "node server/server.js",
     "devServer": "nodemon server/server.js"
   },
   "eslintConfig": {
@@ -72,6 +72,7 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
+    "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   }
 }
