@@ -50,6 +50,38 @@ function* likePost(action){
     }
 }
 
+function* updatePost(action){
+    const { post }= action;
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
+    yield put({type:pending(Actions.UPDATE_POST)});
+    try{
+        yield call(axios.put, `http://localhost:8081/users/posts`, {...post}, config);
+        yield put({type: success(Actions.UPDATE_POST), payload: post});
+    }catch(err){
+        yield put({type: failure(Actions.UPDATE_POST), payload: err});
+    }
+}
+
+function* removePost(action){
+    const { id }= action;
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
+    yield put({type:pending(Actions.REMOVE_POST)});
+    try{
+        yield call(axios.delete, `http://localhost:8081/users/posts/${id}`, config);
+        yield put({type: success(Actions.REMOVE_POST), payload: id});
+    }catch(err){
+        yield put({type: failure(Actions.REMOVE_POST), payload: err});
+    }
+}
+
 export default function* mainContentRootSaga(){
-    yield all([takeEvery(Actions.FETCH_CATEGORIES, fetchCategories), takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags), takeEvery(Actions.LIKE_POST, likePost)])
+    yield all([takeEvery(Actions.FETCH_CATEGORIES, fetchCategories), takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags), takeEvery(Actions.LIKE_POST, likePost), takeEvery(Actions.UPDATE_POST, updatePost), takeEvery(Actions.REMOVE_POST, removePost)])
 }

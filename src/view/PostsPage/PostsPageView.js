@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {Container, Row} from 'react-bootstrap';
 import Category from "../../shared/components/Category/Category";
+import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
 // import style from './PostsPage.module.scss';
 
 class PostsPageView extends Component {
@@ -27,12 +28,14 @@ class PostsPageView extends Component {
   } 
 
   render() {
-    const { categoryData, copiedHashtags, user } = this.props;
+    const { categoryData, copiedHashtags, user, isLoading } = this.props;
     return (
       <div className="mainContent">
         <h3 className="display-5 d-flex justify-content-center text-capitalize">
           {categoryData.name}
         </h3>
+        {isLoading.filter(item => !/LIKE/i.test(item)).length > 0 && (
+          <LoadingOverlay />)}
         <Container>
           <Row className="my-3">
             <Category
@@ -50,6 +53,7 @@ class PostsPageView extends Component {
   }
 }
 PostsPageView.propTypes = {
+  isLoading: PropTypes.arrayOf(String).isRequired,
   categoryData: PropTypes.shape().isRequired,
   copiedHashtags: PropTypes.string,
   match: PropTypes.shape().isRequired,
@@ -57,13 +61,11 @@ PostsPageView.propTypes = {
   updateCopiedHashtags: PropTypes.func.isRequired,
   getUserByToken: PropTypes.func.isRequired,
   user: PropTypes.shape(),
-  likePost: PropTypes.func,
-  removePost: PropTypes.func,
+  likePost: PropTypes.func.isRequired,
+  removePost: PropTypes.func.isRequired,
 };
 PostsPageView.defaultProps = {
   copiedHashtags: null,
-  likePost: () => {},
-  removePost: () => {},
   user: null,
 };
 export default PostsPageView;

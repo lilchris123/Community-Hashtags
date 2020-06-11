@@ -47,6 +47,12 @@ const MyPageView = (props) => {
     const { updatePost } = props;
     updatePost(post);
   };
+
+  const handleLike = (id) => {
+    const { likePost } = props;
+    likePost(id);
+  };
+
   return (
     <>
       <div className={`mainContent ${style.padding}`}>
@@ -61,7 +67,7 @@ const MyPageView = (props) => {
             </Col>
           </Row>
         </Container>
-        {isLoading.length > 0 && (
+        {isLoading.filter(item => !/LIKE/i.test(item)).length > 0 && (
           <LoadingOverlay />
         )}
         <Container>
@@ -69,6 +75,7 @@ const MyPageView = (props) => {
             <Category
               category={posts}
               copiedHashtags={copiedHashtags}
+              handleLike={handleLike}
               handleUpdate={handleUpdate}
               handleCopy={handleCopy}
               handleRemove={handleRemove}
@@ -91,6 +98,7 @@ MyPageView.propTypes = {
   copiedHashtags: PropTypes.string,
   fetchUserPosts: PropTypes.func.isRequired,
   posts: PropTypes.shape().isRequired,
+  likePost: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
   updatePost: PropTypes.func.isRequired,
   removePost: PropTypes.func.isRequired,

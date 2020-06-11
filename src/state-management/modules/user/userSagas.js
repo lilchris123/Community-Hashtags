@@ -65,6 +65,22 @@ function* fetchUserPosts(){
     }
 }
 
+function* likePost(action){
+    const { postId }= action;
+    const config={
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.token)}`
+        }
+    }
+    yield put({type: pending(Actions.LIKE_USER_POST)});
+    try{
+        yield call(axios.put,`http://localhost:8081/posts/like`, { postId }, config);
+        yield put({type: success(Actions.LIKE_USER_POST)});
+    }catch(err){
+        yield put({type: failure(Actions.LIKE_USER_POST), payload: err})
+    }
+}
+
 function* removePost(action){
     const { id }= action;
     const config={
@@ -72,12 +88,12 @@ function* removePost(action){
             Authorization: `Bearer ${JSON.parse(localStorage.token)}`
         }
     }
-    yield put({type:pending(Actions.REMOVE_POST)});
+    yield put({type:pending(Actions.REMOVE_USER_POST)});
     try{
         yield call(axios.delete, `http://localhost:8081/users/posts/${id}`, config);
-        yield put({type: success(Actions.REMOVE_POST), payload: id});
+        yield put({type: success(Actions.REMOVE_USER_POST), payload: id});
     }catch(err){
-        yield put({type: failure(Actions.REMOVE_POST), payload: err});
+        yield put({type: failure(Actions.REMOVE_USER_POST), payload: err});
     }
 }
 
@@ -88,12 +104,12 @@ function* createPost(action){
             Authorization: `Bearer ${JSON.parse(localStorage.token)}`
         }
     }
-    yield put({type:pending(Actions.CREATE_POST)});
+    yield put({type:pending(Actions.CREATE_USER_POST)});
     try{
        const data= yield call(axios.post, `http://localhost:8081/users/posts`, {...post}, config);
-        yield put({type: success(Actions.CREATE_POST), payload: data});
+        yield put({type: success(Actions.CREATE_USER_POST), payload: data});
     }catch(err){
-        yield put({type: failure(Actions.CREATE_POST), payload: err});
+        yield put({type: failure(Actions.CREATE_USER_POST), payload: err});
     }
 }
 
@@ -104,17 +120,17 @@ function* updatePost(action){
             Authorization: `Bearer ${JSON.parse(localStorage.token)}`
         }
     }
-    yield put({type:pending(Actions.UPDATE_POST)});
+    yield put({type:pending(Actions.UPDATE_USER_POST)});
     try{
         yield call(axios.put, `http://localhost:8081/users/posts`, {...post}, config);
-        yield put({type: success(Actions.UPDATE_POST), payload: post});
+        yield put({type: success(Actions.UPDATE_USER_POST), payload: post});
     }catch(err){
-        yield put({type: failure(Actions.UPDATE_POST), payload: err});
+        yield put({type: failure(Actions.UPDATE_USER_POST), payload: err});
     }
 }
 
 export default function* userRootSaga(){
     yield all([takeEvery(Actions.USER_FROM_TOKEN, getUserFromToken), takeEvery(Actions.LOGIN_USER, loginUser),
          takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.LOGOUT_USER, logoutUser), takeEvery(Actions.FETCH_USER_POSTS,
-        fetchUserPosts), takeEvery(Actions.REMOVE_POST, removePost), takeEvery(Actions.CREATE_POST, createPost), takeEvery(Actions.UPDATE_POST, updatePost)]);
+        fetchUserPosts), takeEvery(Actions.REMOVE_USER_POST, removePost), takeEvery(Actions.CREATE_USER_POST, createPost), takeEvery(Actions.UPDATE_USER_POST, updatePost), takeEvery(Actions.LIKE_USER_POST, likePost)]);
 }

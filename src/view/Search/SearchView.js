@@ -6,7 +6,6 @@ import Category from "../../shared/components/Category/Category";
 class SearchView extends Component {
     componentDidMount(){
         const { fetchPostsBySearch, location } = this.props;
-        console.log(location);
         const query=location.search.split('=')[1];
         if(location.search.split('=')[1] !== 'undefined')
             fetchPostsBySearch(query);
@@ -53,12 +52,11 @@ SearchView.propTypes = {
     fetchPostsBySearch: PropTypes.func.isRequired,
     updateCopiedHashtags: PropTypes.func.isRequired,
     user: PropTypes.shape(),
-    removePost: PropTypes.func,
+    removePost: PropTypes.func.isRequired,
   };
   SearchView.defaultProps = {
     copiedHashtags: null,
-    removePost: () => {},
-    user: null,
+    user: null
   };
 
 export default SearchView;

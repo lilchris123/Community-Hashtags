@@ -35,6 +35,11 @@ export default class MainContentView extends Component {
     likePost(id);
   };
 
+  handleUpdate = (post) => {
+    const { updatePost } = this.props;
+    updatePost(post);
+  };
+
   render() {
     const {
       categoryData,
@@ -50,7 +55,7 @@ export default class MainContentView extends Component {
             {" "}
             Top HashTags
           </h3>
-          {(isLoadingMainContent.length > 0 || isLoadingUser.length > 0) && (
+          {(isLoadingMainContent.filter(item => !/LIKE/i.test(item)).length > 0 || isLoadingUser.length > 0) && (
           <LoadingOverlay />
         )}
           <Container>
@@ -59,6 +64,7 @@ export default class MainContentView extends Component {
                 category={categoryData}
                 copiedHashtags={copiedHashtags}
                 handleLike={this.handleLike}
+                handleUpdate={this.handleUpdate}
                 handleCopy={this.handleCopy}
                 handleRemove={this.handleRemove}
                 currentUser={user && user.username}
@@ -72,8 +78,8 @@ export default class MainContentView extends Component {
   }
 }
 MainContentView.propTypes = {
-  isLoadingMainContent: PropTypes.arrayOf(String),
-  isLoadingUser: PropTypes.arrayOf(String),
+  isLoadingMainContent: PropTypes.arrayOf(String).isRequired,
+  isLoadingUser: PropTypes.arrayOf(String).isRequired,
   categoryData: PropTypes.shape().isRequired,
   copiedHashtags: PropTypes.string,
   fetchCategories: PropTypes.func.isRequired,
@@ -81,14 +87,11 @@ MainContentView.propTypes = {
   updateCopiedHashtags: PropTypes.func.isRequired,
   getUserByToken: PropTypes.func.isRequired,
   user: PropTypes.shape(),
-  likePost: PropTypes.func,
-  removePost: PropTypes.func,
+  likePost: PropTypes.func.isRequired,
+  updatePost: PropTypes.func.isRequired,
+  removePost: PropTypes.func.isRequired
 };
 MainContentView.defaultProps = {
   copiedHashtags: null,
-  isLoadingMainContent: () => {},
-  isLoadingUser: () => {},
-  likePost: () => {},
-  removePost: () => {},
   user: {},
 };

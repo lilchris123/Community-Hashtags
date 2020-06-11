@@ -21,6 +21,7 @@ const mapDispatchToProps = (dispatch) =>{
         logoutUser: () => dispatch(userActions.logoutUser()),
         updateCopiedHashtags: (id)=> dispatch(mainActions.copiedHashtags(id)),
         fetchUserPosts: () => dispatch(userActions.fetchUserPosts()),
+        likePost: (id) => dispatch(userActions.likePost(id)),
         removePost: (id) => dispatch(userActions.removePost(id)),
         createPost: (post) => dispatch(userActions.createPost(post)),
         updatePost: (post) => dispatch(userActions.updatePost(post))

@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch)=> {
         updateCopiedHashtags: (id)=> dispatch(mainActions.copiedHashtags(id)),
         getUserByToken: () => dispatch(userActions.getUserFromToken()),
         likePost: (id) => dispatch(mainActions.likePost(id)),
-        updatePost: (post) => dispatch(userActions.updatePost(post)),
-        removePost: (id) => dispatch(userActions.removePost(id))
+        updatePost: (post) => dispatch(mainActions.updatePost(post)),
+        removePost: (id) => dispatch(mainActions.removePost(id))
     }
 }
 

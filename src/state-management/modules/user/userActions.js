@@ -3,9 +3,10 @@ export const REGISTER_USER='REGISTER_USER';
 export const USER_FROM_TOKEN='USER_FROM_TOKEN';
 export const LOGOUT_USER='LOGOUT_USER';
 export const FETCH_USER_POSTS='FETCH_USER_POSTS';
-export const REMOVE_POST='REMOVE_POST';
-export const CREATE_POST='CREATE_POST';
-export const UPDATE_POST='UPDATE_POST';
+export const LIKE_USER_POST= 'LIKE_USER_POST';
+export const REMOVE_USER_POST='REMOVE_USER_POST';
+export const CREATE_USER_POST='CREATE_USER_POST';
+export const UPDATE_USER_POST='UPDATE_USER_POST';
 
 export const getUserFromToken= ()=>{
     return{
@@ -41,21 +42,28 @@ export const fetchUserPosts= () =>{
 
 export const removePost= (id) =>{
     return{
-        type: REMOVE_POST,
+        type: REMOVE_USER_POST,
         id
     }
 }
 
 export const createPost= (post) =>{
     return{
-        type: CREATE_POST,
+        type: CREATE_USER_POST,
         post
     }
 }
 
 export const updatePost= (post) =>{
     return{
-        type: UPDATE_POST,
+        type: UPDATE_USER_POST,
         post
+    }
+}
+
+export const likePost = (postId) => {
+    return{
+        type: LIKE_USER_POST,
+        postId
     }
 }
