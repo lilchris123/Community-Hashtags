@@ -1,6 +1,7 @@
-const API_HOSTNAME= process.env.NODE_ENV ==='production' ? 'communityhashtags.herokuapp' :'localhost';
+const isProduction= process.env.NODE_ENV ==='production';
+const API_HOSTNAME= isProduction ? 'communityhashtags.herokuapp' :'localhost';
 const PORT= 8080;
-export const API_URL= `http://${API_HOSTNAME}:${PORT}/api`;
+export const API_URL= `http${isProduction ? 's': ''}://${API_HOSTNAME}:${PORT}/api`;
 
 export const addTokenConfig={
     headers: {
