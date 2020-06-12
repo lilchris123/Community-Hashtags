@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A social website that allows users to share their favorite hashtags with others. It also allows users to like other's post, allowing users to easily find new set of hashtags that are relevent to a specific niche.",
   "scripts": {
+    "start": "npm start --prefix server",
     "client": "npm start --prefix client",
     "server": "npm start --prefix server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
