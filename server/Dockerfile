@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8081
 
 # Install Dependencies & npm start from each package
-CMD ["npm","run","server"]
+CMD ["npm","start"]
