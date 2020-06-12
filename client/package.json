@@ -8,20 +8,12 @@
     "@testing-library/user-event": "^7.2.0",
     "axios": "^0.19.2",
     "babel-cli": "^6.26.0",
-    "bcrypt": "^4.0.1",
-    "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "formik": "^2.1.4",
-    "helmet": "^3.21.3",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
-    "mongoose": "^5.9.2",
-    "morgan": "^1.9.1",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
     "prop-types": "^15.7.2",
@@ -42,9 +34,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint",
-    "server": "node server/server.js",
-    "devServer": "nodemon server/server.js"
+    "lint": "eslint"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -72,7 +62,6 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.2",
-    "nodemon": "^2.0.4",
     "prettier": "^2.0.5"
   }
 }
