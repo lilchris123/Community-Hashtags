@@ -1,0 +1,24 @@
+{
+  "name": "community-hashtags",
+  "version": "1.0.0",
+  "description": "A social website that allows users to share their favorite hashtags with others. It also allows users to like other's post, allowing users to easily find new set of hashtags that are relevent to a specific niche.",
+  "scripts": {
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lilchris123/Community-Hashtags.git"
+  },
+  "author": "Chris Mayol",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lilchris123/Community-Hashtags/issues"
+  },
+  "homepage": "https://github.com/lilchris123/Community-Hashtags#readme",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  }
+}

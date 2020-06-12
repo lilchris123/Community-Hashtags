@@ -1,12 +1,12 @@
 {
   "name": "community-hashtags-server",
   "version": "1.0.0",
-  "description": "app node server",
+  "description": "Backend node server",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node server.js",
-    "dev": "nodemon server/server.js"
+    "start": "node server.js",
+    "server": "nodemon server/server.js"
   },
   "author": "Chris Mayol",
   "license": "ISC",
