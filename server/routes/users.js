@@ -49,29 +49,37 @@ router.route('/').get([authenticateToken, authenticateAdmin],(req,res)=>{
 });
 
 router.route('/posts').get(authenticateToken,(req,res)=>{
-    Post.find({createdBy: req.user._id}).then(posts => res.json(posts))
+    Post.find({createdBy: req.user.username}).then(posts => res.json(posts))
     .catch(err => res.status(400).json(`Error: ${err}`));
 })
 
 .post(authenticateToken,(req,res)=>{
-    const { hashtags, likes, description, likedBy, category} = req.body;
+    const { hashtags, description, category} = req.body;
     const newPost= new Post({
         createdBy: req.user.username,
         hashtags,
-        likes,
+        likes: 0,
         description,
-        likedBy,
+        likedBy: [],
         category
     });
 
-    newPost.save().then(()=> res.json('New Post Created')).catch(err=> res.status(400).json(`Error ${err}`));
+    newPost.save().then((data)=> res.status(201).json(data)).catch(err=> res.status(400).json(`Error ${err}`));
 
 })
 
-.delete(authenticateToken,(req, res)=>{
-    Post.findOneAndDelete({
-        createdBy: req.user.username, 
-        _id: req.params.id})
+.put(authenticateToken,(req,res)=>{
+    const { _id, hashtags, description, category} = req.body;
+    Post.findByIdAndUpdate(_id,{
+        hashtags,
+        description,
+        category
+    }).then((data)=> res.status(200).json(data)).catch(err=> res.status(400).json(`Error ${err}`));
+
+})
+
+router.route('/posts/:id').delete(authenticateToken,(req, res)=>{
+    Post.findByIdAndDelete({_id: req.params.id})
     .then(()=> res.json('deleted from DB'))
     .catch((err)=> res.status(400).json(`Error ${err}`));
 });

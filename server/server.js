@@ -11,8 +11,14 @@ const morgan= require('morgan');
 const app = express();
 
 // env variables
-const PORT= process.env.PORT || 8081;
-const MONGODB_URI= process.env.MONGODB_URI || 'mongodb+srv://lilchris:Chris123@cluster0-hnhd3.mongodb.net/community_hashtagsDB';
+const {
+    MONGO_HOSTNAME,
+    MONGO_USERNAME,
+    MONGO_PASSWORD,
+    MONGO_DB,
+    PORT
+}= process.env
+const MONGODB_URI= `mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`
 
 // connect to mongodb
 mongoose.connect(MONGODB_URI, {
