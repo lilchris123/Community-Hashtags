@@ -1,4 +1,4 @@
-const API_HOSTNAME='localhost'
+const API_HOSTNAME= process.env.NODE_ENV ==='production' ? 'communityhashtags.herokuapp' :'localhost';
 const PORT= 8080;
 export const API_URL= `http://${API_HOSTNAME}:${PORT}/api`;
 
