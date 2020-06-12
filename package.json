@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/lilchris123/Community-Hashtags#readme",
   "dependencies": {
-    "concurrently": "^5.2.0"
+    "concurrently": "^5.2.0",
+    "dotenv": "^8.2.0"
   }
 }
