@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "A social website that allows users to share their favorite hashtags with others. It also allows users to like other's post, allowing users to easily find new set of hashtags that are relevent to a specific niche.",
   "scripts": {
+    "start": "npm start --prefix server",
     "client": "npm start --prefix client",
     "server": "npm start --prefix server",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client && npm install --prefix server"
   },
   "repository": {
     "type": "git",
