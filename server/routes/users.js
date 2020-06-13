@@ -16,9 +16,9 @@ router.route('/login').post( (req, res) => {
             res.json({ token });
         }
         else
-            res.sendStatus(403);
+            res.status(401).json({err: 'Incorrect password try again'});
     })
-    .catch(err => res.status(400).send(`User not found ${err}`));
+    .catch(() => res.status(401).json({err: `Username not found try again`}));
 })
 
 router.route('/register').post( async (req,res) => {
@@ -40,7 +40,7 @@ router.route('/register').post( async (req,res) => {
     });
     return newUser.save()
     .then((data) => res.status(201).json(data))
-    .catch(err => res.status(500).json(`Failed to register user ${err}`));
+    .catch(err => res.status(400).json(`Failed to register user ${err}`));
 })
 
 router.route('/').get([authenticateToken, authenticateAdmin],(req,res)=>{

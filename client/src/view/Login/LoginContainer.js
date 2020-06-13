@@ -6,7 +6,8 @@ import LoginView from './LoginView';
 const mapStateToProps= (state) =>{
     return {
         isLoading: userSelectors.getLoading(state),
-        user: userSelectors.getUser(state)
+        user: userSelectors.getUser(state),
+        error: userSelectors.getError(state)
     }
 }
 const mapDispatchToProps = (dispatch) =>{
