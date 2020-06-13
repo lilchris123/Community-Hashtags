@@ -9,14 +9,14 @@ export default class LoginView extends Component {
     }
     
   render() {
-    const {user, loginUser} =this.props;
+    const {user, loginUser, error} =this.props;
     return (
       <div className='mainContent'>
         <div className="d-flex justify-content-center my-3">
           <h2 className='display-5'>Login</h2>
         </div>
         <div className="d-flex justify-content-center">
-          <LoginForm user={user} loginUser={loginUser}/>
+          <LoginForm user={user} loginUser={loginUser} error={error}/>
         </div>
       </div>
     );
@@ -25,9 +25,10 @@ export default class LoginView extends Component {
 
 LoginView.propTypes= {
   user: PropTypes.shape(),
-  loginUser: PropTypes.func.isRequired
+  loginUser: PropTypes.func.isRequired,
+  error: PropTypes.shape().isRequired
 }
 
 LoginView.defaultProps= {
-  user: []
+  user: [],
 }

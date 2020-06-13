@@ -9,14 +9,16 @@ import {
   FormControl,
   FormLabel,
   Button,
+  Alert
 } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import {useHistory} from 'react-router-dom';
+import _ from 'lodash';
 import style from"./RegisterForm.module.scss";
 
 const RegisterForm = (props) => {
-  const {registerUser} =props
+  const {registerUser, error} =props
   const history= useHistory();
 
   const validationRegisterSchema = Yup.object({
@@ -28,10 +30,12 @@ const RegisterForm = (props) => {
       .required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
     username: Yup.string()
+      .matches(/^([A-Za-z]+\d*)$/i, "Can only contain alphabetic characters can be followed by numbers")
       .min(6, "Minimum of 6 characters")
       .max(40, "Max of 40 characters allowed")
       .required("Required"),
     password: Yup.string()
+      .matches(/^([A-Za-z]+\d+)$/i, "Must only contain alphabetic characters and followed by numbers")
       .min(6, "Minimum of 6 characters")
       .max(40, "Max of 40 characters allowed")
       .required("Required"),
@@ -50,11 +54,12 @@ const RegisterForm = (props) => {
       onSubmit={(values, { setSubmitting }) => {
           registerUser(values);
           setSubmitting(false);
-          history.push('/login');
+          if(_.isEmpty(error)) history.push('/login');
       }}
     >
       {(formik) => (
         <Form onSubmit={formik.handleSubmit} className={style.form}>
+          {!_.isEmpty(error) && <Alert variant='danger'>Unable to sign up</Alert>}
           <Form.Row>
             <FormGroup as={Col} xs={12} sm={6} controlId="firstName">
               <FormLabel>First Name</FormLabel>

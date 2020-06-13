@@ -110,7 +110,7 @@ function* updatePost(action){
 }
 
 export default function* userRootSaga(){
-    yield all([takeEvery(Actions.USER_FROM_TOKEN, getUserFromToken), takeEvery(Actions.LOGIN_USER, loginUser),
-         takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.LOGOUT_USER, logoutUser), takeEvery(Actions.FETCH_USER_POSTS,
+    yield all([takeEvery(Actions.LOGIN_USER, loginUser), takeEvery(Actions.REGISTER_USER, registerUser), takeEvery(Actions.USER_FROM_TOKEN, getUserFromToken),
+          takeEvery(Actions.LOGOUT_USER, logoutUser), takeEvery(Actions.FETCH_USER_POSTS,
         fetchUserPosts), takeEvery(Actions.REMOVE_USER_POST, removePost), takeEvery(Actions.CREATE_USER_POST, createPost), takeEvery(Actions.UPDATE_USER_POST, updatePost), takeEvery(Actions.LIKE_USER_POST, likePost)]);
 }

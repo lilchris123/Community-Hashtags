@@ -9,14 +9,16 @@ import {
   FormControl,
   FormLabel,
   Button,
+  Alert
 } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import style from "./LoginForm.module.scss";
+import _ from 'lodash';
 
 const LoginForm = (props) => {
-  const {loginUser} = props;
+  const {loginUser, error} = props;
   const history = useHistory();
 
   const handleSignUp = () => {
@@ -44,11 +46,12 @@ const LoginForm = (props) => {
           const {username, password}= values;
           loginUser({username, password});
           setSubmitting(false);
-          history.push('/');
+          if(_.isEmpty(error)) history.push('/');
       }}
     >
       {(formik) => (
         <Form onSubmit={formik.handleSubmit} className={style.form}>
+          {!_.isEmpty(error) && <Alert variant='danger'>Unable to login</Alert>}
           <FormGroup controlId="username">
             <FormLabel>Username</FormLabel>
             <Col>

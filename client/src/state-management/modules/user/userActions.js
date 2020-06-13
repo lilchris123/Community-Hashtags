@@ -14,7 +14,7 @@ export const getUserFromToken= ()=>{
     }
 }
 
-export const loginUser=(userDetails)=>{
+export const loginUser= (userDetails)=>{
     return{
         type: LOGIN_USER,
         userDetails

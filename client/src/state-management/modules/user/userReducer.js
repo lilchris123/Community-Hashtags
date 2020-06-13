@@ -7,6 +7,7 @@ const intialState = {
   user: {},
   posts: {},
   isLoggedIn: false,
+  error: {}
 };
 const reducer = (state = intialState, action) => {
   const { type, payload } = action;
@@ -52,6 +53,7 @@ const reducer = (state = intialState, action) => {
         isLoading: state.isLoading.filter(
           (item) => item !== Actions.LOGIN_USER
         ),
+        error: payload
       };
     case pending(Actions.REGISTER_USER):
       return {
@@ -72,6 +74,7 @@ const reducer = (state = intialState, action) => {
         isLoading: state.isLoading.filter(
           (item) => item !== Actions.REGISTER_USER
         ),
+        error: payload
       };
     case pending(Actions.LOGOUT_USER):
       return {

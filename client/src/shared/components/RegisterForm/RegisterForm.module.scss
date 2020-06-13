@@ -1,9 +1,20 @@
+@media screen and (max-width: 350px){
+    .form{
+        border: solid lightgray 2px;
+        border-radius: 10px;
+        width: 70vw;
+        height: 90vh;
+        padding: 3vw;
+        font-size: .8rem !important;
+    }
+}
+
 @media screen and (max-width: 600px){
     .form{
         border: solid lightgray 2px;
         border-radius: 10px;
-        width: 50vw;
-        height: 65vh;
+        width: 60vw;
+        height: 75vh;
         padding: 3vw;
         font-size: .8rem !important;
     }
@@ -13,8 +24,8 @@
     .form{
         border: solid lightgray 2px;
         border-radius: 10px;
-        width: 50vw;
-        height: 60vh;
+        width: 60vw;
+        height: 75vh;
         padding: 4vh;
     }
 }
@@ -23,8 +34,8 @@
     .form{
         border: solid lightgray 2px;
         border-radius: 10px;
-        width: 55vw;
-        height: 65vh;
+        width: 60vw;
+        height: 70vh;
         padding: 4vh;
         font-size: 1.2rem !important;
     }

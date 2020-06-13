@@ -9,14 +9,14 @@ export default class RegisterView extends Component {
     }
     
   render() {
-    const {user, registerUser} =this.props;
+    const {user, registerUser, error} =this.props;
     return (
       <div className='mainContent'>
         <div className="d-flex justify-content-center my-3">
           <h2>Register</h2>
         </div>
         <div className="d-flex justify-content-center">
-          <RegisterForm user={user} registerUser={registerUser}/>
+          <RegisterForm user={user} registerUser={registerUser} error={error}/>
         </div>
       </div>
     );
@@ -25,7 +25,8 @@ export default class RegisterView extends Component {
 
 RegisterView.propTypes= {
   user: PropTypes.shape(),
-  registerUser: PropTypes.func.isRequired
+  registerUser: PropTypes.func.isRequired,
+  error: PropTypes.shape().isRequired
 }
 
 RegisterView.defaultProps= {
