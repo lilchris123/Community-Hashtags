@@ -11,8 +11,6 @@ const MyPageView = (props) => {
   const {
     isLoading,
     user,
-    isLoggedIn,
-    getUserFromToken,
     logoutUser,
     copiedHashtags,
     fetchUserPosts,
@@ -21,9 +19,8 @@ const MyPageView = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (!isLoggedIn) getUserFromToken();
     fetchUserPosts();
-  }, [isLoggedIn, getUserFromToken, fetchUserPosts]);
+  },[fetchUserPosts]);
 
   const logout = () => {
     logoutUser();
@@ -91,8 +88,6 @@ const MyPageView = (props) => {
 MyPageView.propTypes = {
   isLoading: PropTypes.arrayOf(String).isRequired,
   user: PropTypes.shape().isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
-  getUserFromToken: PropTypes.func.isRequired,
   logoutUser: PropTypes.func.isRequired,
   updateCopiedHashtags: PropTypes.func.isRequired,
   copiedHashtags: PropTypes.string,

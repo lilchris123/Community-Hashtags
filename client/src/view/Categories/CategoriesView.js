@@ -6,8 +6,9 @@ import style from './Categories.module.scss';
 
 class CategoriesView extends Component {
   componentDidMount() {
-    const { fetchCategories } = this.props;
-    fetchCategories();
+    const { fetchCategories, categories } = this.props;
+    if(categories.length === 0 )
+      fetchCategories();
   }
 
   render() {

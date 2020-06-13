@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { NavLink, useHistory } from "react-router-dom";
 import {
@@ -9,20 +9,27 @@ import {
   Button,
   FormGroup,
   FormControl,
+  OverlayTrigger,
+  Tooltip,
 } from "react-bootstrap";
 import style from "./Nav.module.scss";
 
 export default function NavView(props) {
-  const { isLoggedIn } = props;
-  const [query, setQuery] = useState('');
+  const { isLoggedIn, getUserFromToken } = props;
+  const [query, setQuery] = useState("");
   const history = useHistory();
 
-  const handleSearch= () => {
-   history.push({
-    pathname: "/search",
-    search: `?query=${query}`
+  useEffect(() => {
+    if (!isLoggedIn && localStorage.getItem("token") !== null)
+      getUserFromToken();
   });
-  }
+
+  const handleSearch = () => {
+    history.push({
+      pathname: "/search",
+      search: `?query=${query}`,
+    });
+  };
 
   return (
     <Navbar
@@ -91,17 +98,26 @@ export default function NavView(props) {
               placeholder="Search"
               aria-label="Search"
               value={query}
-              onChange={(event)=> setQuery(event.target.value)}
+              onChange={(event) => setQuery(event.target.value)}
             />
           </FormGroup>
-          <Button
-            size='lg'
-            variant="outline-success"
-            className="my-2 my-sm-0 ml-3 mb-4"
-            type="submit"
+          <OverlayTrigger
+            overlay={<Tooltip id="tooltip-disabled">In development</Tooltip>}
+            placement="bottom"
           >
-            Search
-          </Button>
+            <span className="d-inline-block">
+              <Button
+                size="lg"
+                variant="outline-success"
+                className="my-2 my-sm-0 ml-3 mb-4"
+                type="submit"
+                disabled
+                style={{ pointerEvents: "none" }}
+              >
+                Search
+              </Button>
+            </span>
+          </OverlayTrigger>
         </Form>
       </Navbar.Collapse>
     </Navbar>

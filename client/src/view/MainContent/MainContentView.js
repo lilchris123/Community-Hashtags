@@ -12,12 +12,10 @@ export default class MainContentView extends Component {
   componentDidMount() {
     const {
       fetchCategories,
-      fetchHashtagsByCategory,
-      getUserByToken,
+      fetchHashtagsByCategory
     } = this.props;
     fetchCategories();
     fetchHashtagsByCategory("popular");
-    getUserByToken();
   }
 
   handleCopy = (id) => {
@@ -85,7 +83,6 @@ MainContentView.propTypes = {
   fetchCategories: PropTypes.func.isRequired,
   fetchHashtagsByCategory: PropTypes.func.isRequired,
   updateCopiedHashtags: PropTypes.func.isRequired,
-  getUserByToken: PropTypes.func.isRequired,
   user: PropTypes.shape(),
   likePost: PropTypes.func.isRequired,
   updatePost: PropTypes.func.isRequired,

@@ -7,9 +7,8 @@ import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverla
 
 class PostsPageView extends Component {
   componentDidMount() {
-    const { fetchHashtagsByCategory, getUserByToken, match } = this.props;
+    const { fetchHashtagsByCategory, match } = this.props;
     fetchHashtagsByCategory(match.params.category);
-    getUserByToken();
   }
 
   handleCopy = (id) => {
@@ -59,7 +58,6 @@ PostsPageView.propTypes = {
   match: PropTypes.shape().isRequired,
   fetchHashtagsByCategory: PropTypes.func.isRequired,
   updateCopiedHashtags: PropTypes.func.isRequired,
-  getUserByToken: PropTypes.func.isRequired,
   user: PropTypes.shape(),
   likePost: PropTypes.func.isRequired,
   removePost: PropTypes.func.isRequired,

@@ -8,7 +8,6 @@ import MyPageView from './MyPageView';
 const mapStateToProps = (state) =>{
     return{
         user: userSelectors.getUser(state),
-        isLoggedIn: userSelectors.getLoggedIn(state),
         posts: userSelectors.getPosts(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state),
         isLoading: userSelectors.getLoading(state)
@@ -17,7 +16,6 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        getUserFromToken: () => dispatch(userActions.getUserFromToken()),
         logoutUser: () => dispatch(userActions.logoutUser()),
         updateCopiedHashtags: (id)=> dispatch(mainActions.copiedHashtags(id)),
         fetchUserPosts: () => dispatch(userActions.fetchUserPosts()),
