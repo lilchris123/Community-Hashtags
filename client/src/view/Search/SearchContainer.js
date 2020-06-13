@@ -18,7 +18,6 @@ const mapStateToProps = (state)=> {
 
 const mapDispatchToProps = (dispatch)=> {
     return {
-        getUserByToken: () => dispatch(userActions.getUserFromToken()),
         fetchPostsBySearch: (query) => dispatch(searchActions.fetchPostsBySearch(query)),
         updateCopiedHashtags: (id)=> dispatch(Actions.copiedHashtags(id)),
         updatePost: (post) => dispatch(userActions.updatePost(post)),
