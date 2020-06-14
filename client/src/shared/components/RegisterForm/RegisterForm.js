@@ -9,17 +9,16 @@ import {
   FormControl,
   FormLabel,
   Button,
-  Alert
+  Alert,
+  Spinner
 } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import {useHistory} from 'react-router-dom';
 import _ from 'lodash';
 import style from"./RegisterForm.module.scss";
 
 const RegisterForm = (props) => {
-  const {registerUser, error} =props
-  const history= useHistory();
+  const {registerUser, error, formStatus} =props
 
   const validationRegisterSchema = Yup.object({
     firstName: Yup.string()
@@ -51,11 +50,7 @@ const RegisterForm = (props) => {
         password: "",
       }}
       validationSchema={validationRegisterSchema}
-      onSubmit={(values, { setSubmitting }) => {
-          registerUser(values);
-          setSubmitting(false);
-          if(_.isEmpty(error)) history.push('/login');
-      }}
+      onSubmit={(values) => registerUser(values)}
     >
       {(formik) => (
         <Form onSubmit={formik.handleSubmit} className={style.form}>
@@ -146,13 +141,25 @@ const RegisterForm = (props) => {
             </Form.Control.Feedback>
             </Col>
           </FormGroup>
-          
-          <Button
-            type="submit"
-            disabled={formik.isSubmitting || !formik.isValid}
-          >
-            Register
-          </Button>
+          { formStatus === 'SIGNUP_SUBMITTING' ?
+              <Button type="submit" disabled>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                <span className="sr-only">Loading...</span>
+              </Button>
+              :
+              <Button
+                type="submit"
+                disabled={!formik.isValid}
+              >
+                Sign Up
+              </Button>
+            }
         </Form>
       )}
     </Formik>

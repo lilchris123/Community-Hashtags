@@ -4,19 +4,21 @@ import LoginForm from "../../shared/components/LoginForm/LoginForm";
 // import style from './Login.module.scss';
 
 export default class LoginView extends Component {
-    constructor(props){
-      super();
-    }
+
+  componentDidUpdate(){
+      const {formStatus, history}= this.props;
+      if(formStatus === 'LOGIN_SUBMITTED') history.push('/');
+  }
     
   render() {
-    const {user, loginUser, error} =this.props;
+    const {user, loginUser, error, formStatus} =this.props;
     return (
       <div className='mainContent'>
         <div className="d-flex justify-content-center my-3">
           <h2 className='display-5'>Login</h2>
         </div>
         <div className="d-flex justify-content-center">
-          <LoginForm user={user} loginUser={loginUser} error={error}/>
+          <LoginForm user={user} loginUser={loginUser} error={error} formStatus={formStatus}/>
         </div>
       </div>
     );
@@ -26,7 +28,7 @@ export default class LoginView extends Component {
 LoginView.propTypes= {
   user: PropTypes.shape(),
   loginUser: PropTypes.func.isRequired,
-  error: PropTypes.shape().isRequired
+  error: PropTypes.string.isRequired
 }
 
 LoginView.defaultProps= {

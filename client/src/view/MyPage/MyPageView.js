@@ -20,7 +20,7 @@ const MyPageView = (props) => {
 
   useEffect(() => {
     fetchUserPosts();
-  },[fetchUserPosts]);
+  },[]);
 
   const logout = () => {
     logoutUser();

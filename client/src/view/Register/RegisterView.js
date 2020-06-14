@@ -4,19 +4,21 @@ import RegisterForm from "../../shared/components/RegisterForm/RegisterForm";
 // import style from './Register.module.scss';
 
 export default class RegisterView extends Component {
-    constructor(props){
-      super();
-    }
+
+  componentDidUpdate(){
+    const {formStatus, history}= this.props;
+    if(formStatus === 'SIGNUP_SUBMITTED') history.push('/login');
+  }
     
   render() {
-    const {user, registerUser, error} =this.props;
+    const {user, registerUser, error, formStatus} =this.props;
     return (
       <div className='mainContent'>
         <div className="d-flex justify-content-center my-3">
           <h2>Register</h2>
         </div>
         <div className="d-flex justify-content-center">
-          <RegisterForm user={user} registerUser={registerUser} error={error}/>
+          <RegisterForm user={user} registerUser={registerUser} error={error} formStatus={formStatus}/>
         </div>
       </div>
     );
@@ -26,7 +28,7 @@ export default class RegisterView extends Component {
 RegisterView.propTypes= {
   user: PropTypes.shape(),
   registerUser: PropTypes.func.isRequired,
-  error: PropTypes.shape().isRequired
+  error: PropTypes.string.isRequired
 }
 
 RegisterView.defaultProps= {

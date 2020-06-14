@@ -7,7 +7,8 @@ const intialState = {
   user: {},
   posts: {},
   isLoggedIn: false,
-  error: {}
+  error: '',
+  formStatus: 'NOT_SUBMITTED'
 };
 const reducer = (state = intialState, action) => {
   const { type, payload } = action;
@@ -37,6 +38,7 @@ const reducer = (state = intialState, action) => {
       return {
         ...state,
         isLoading: [...state.isLoading, Actions.LOGIN_USER],
+        formStatus: 'LOGIN_SUBMITTING'
       };
     case success(Actions.LOGIN_USER):
       return {
@@ -46,6 +48,8 @@ const reducer = (state = intialState, action) => {
         ),
         user: payload,
         isLoggedIn: true,
+        error: '',
+        formStatus: 'LOGIN_SUBMITTED'
       };
     case failure(Actions.LOGIN_USER):
       return {
@@ -53,12 +57,14 @@ const reducer = (state = intialState, action) => {
         isLoading: state.isLoading.filter(
           (item) => item !== Actions.LOGIN_USER
         ),
-        error: payload
+        error: 'LOGIN_ERROR',
+        formStatus: 'NOT_SUBMITTED'
       };
     case pending(Actions.REGISTER_USER):
       return {
         ...state,
         isLoading: [...state.isLoading, Actions.REGISTER_USER],
+        formStatus: 'SIGNUP_SUBMITTING'
       };
 
     case success(Actions.REGISTER_USER):
@@ -67,6 +73,8 @@ const reducer = (state = intialState, action) => {
         isLoading: state.isLoading.filter(
           (item) => item !== Actions.REGISTER_USER
         ),
+        error: '',
+        formStatus: 'SIGNUP_SUBMITTED'
       };
     case failure(Actions.REGISTER_USER):
       return {
@@ -74,7 +82,8 @@ const reducer = (state = intialState, action) => {
         isLoading: state.isLoading.filter(
           (item) => item !== Actions.REGISTER_USER
         ),
-        error: payload
+        error: 'SIGNUP_ERROR',
+        formStatus: 'NOT_SUBMITTED'
       };
     case pending(Actions.LOGOUT_USER):
       return {
@@ -89,6 +98,7 @@ const reducer = (state = intialState, action) => {
         ),
         user: {},
         isLoggedIn: false,
+        formStatus: 'NOT_SUBMITTED' 
       };
     case failure(Actions.LOGOUT_USER):
       return {
