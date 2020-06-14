@@ -1,4 +1,4 @@
-import { takeEvery, all, put, call} from 'redux-saga/effects';
+import { takeEvery,  takeLeading, all, put, call} from 'redux-saga/effects';
 import axios from 'axios';
 import { pending, success, failure } from '../../reduxPromiseActionNames';
 import * as Actions from './mainContentActions';
@@ -40,7 +40,7 @@ function* likePost(action){
     
     yield put({type: pending(Actions.LIKE_POST)});
     try{
-        yield call(axios.put, `${API_URL}/posts/like`, { postId }, addTokenConfig);
+        yield call(axios.put, `${API_URL}/posts/like`, { postId }, addTokenConfig());
         yield put({type: success(Actions.LIKE_POST)});
     }catch(err){
         yield put({type: failure(Actions.LIKE_POST), payload: err})
@@ -52,7 +52,7 @@ function* updatePost(action){
     
     yield put({type:pending(Actions.UPDATE_POST)});
     try{
-        yield call(axios.put, `${API_URL}/users/posts`, {...post}, addTokenConfig);
+        yield call(axios.put, `${API_URL}/users/posts`, {...post}, addTokenConfig());
         yield put({type: success(Actions.UPDATE_POST), payload: post});
     }catch(err){
         yield put({type: failure(Actions.UPDATE_POST), payload: err});
@@ -64,7 +64,7 @@ function* removePost(action){
     
     yield put({type:pending(Actions.REMOVE_POST)});
     try{
-        yield call(axios.delete, `${API_URL}/users/posts/${id}`, addTokenConfig);
+        yield call(axios.delete, `${API_URL}/users/posts/${id}`, addTokenConfig());
         yield put({type: success(Actions.REMOVE_POST), payload: id});
     }catch(err){
         yield put({type: failure(Actions.REMOVE_POST), payload: err});
@@ -72,5 +72,5 @@ function* removePost(action){
 }
 
 export default function* mainContentRootSaga(){
-    yield all([takeEvery(Actions.FETCH_CATEGORIES, fetchCategories), takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags), takeEvery(Actions.LIKE_POST, likePost), takeEvery(Actions.UPDATE_POST, updatePost), takeEvery(Actions.REMOVE_POST, removePost)])
+    yield all([takeLeading(Actions.FETCH_CATEGORIES, fetchCategories), takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags), takeEvery(Actions.LIKE_POST, likePost), takeEvery(Actions.UPDATE_POST, updatePost), takeEvery(Actions.REMOVE_POST, removePost)])
 }

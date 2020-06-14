@@ -7,7 +7,8 @@ const mapStateToProps= (state) =>{
     return {
         isLoading: userSelectors.getLoading(state),
         user: userSelectors.getUser(state),
-        error: userSelectors.getError(state)
+        error: userSelectors.getError(state),
+        formStatus: userSelectors.getFormStatus(state)
     }
 }
 const mapDispatchToProps = (dispatch) =>{

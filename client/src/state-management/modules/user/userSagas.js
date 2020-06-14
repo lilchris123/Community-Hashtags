@@ -54,7 +54,7 @@ function* logoutUser(){
 function* fetchUserPosts(){
     yield put({type:pending(Actions.FETCH_USER_POSTS)});
     try{
-        const data= yield call(axios.get, `${API_URL}/users/posts`, addTokenConfig);
+        const data= yield call(axios.get, `${API_URL}/users/posts`, addTokenConfig());
         yield put({type: success(Actions.FETCH_USER_POSTS), payload: data});
     }catch(err){
          yield put({type: failure(Actions.FETCH_USER_POSTS), payload: err});
@@ -66,7 +66,7 @@ function* likePost(action){
 
     yield put({type: pending(Actions.LIKE_USER_POST)});
     try{
-        yield call(axios.put, `${API_URL}/posts/like`, { postId }, addTokenConfig);
+        yield call(axios.put, `${API_URL}/posts/like`, { postId }, addTokenConfig());
         yield put({type: success(Actions.LIKE_USER_POST)});
     }catch(err){
         yield put({type: failure(Actions.LIKE_USER_POST), payload: err})
@@ -78,7 +78,7 @@ function* removePost(action){
 
     yield put({type:pending(Actions.REMOVE_USER_POST)});
     try{
-        yield call(axios.delete, `${API_URL}/users/posts/${id}`, addTokenConfig);
+        yield call(axios.delete, `${API_URL}/users/posts/${id}`, addTokenConfig());
         yield put({type: success(Actions.REMOVE_USER_POST), payload: id});
     }catch(err){
         yield put({type: failure(Actions.REMOVE_USER_POST), payload: err});
@@ -90,7 +90,7 @@ function* createPost(action){
 
     yield put({type:pending(Actions.CREATE_USER_POST)});
     try{
-       const data= yield call(axios.post, `${API_URL}/users/posts`, {...post}, addTokenConfig);
+       const data= yield call(axios.post, `${API_URL}/users/posts`, {...post}, addTokenConfig());
         yield put({type: success(Actions.CREATE_USER_POST), payload: data});
     }catch(err){
         yield put({type: failure(Actions.CREATE_USER_POST), payload: err});
@@ -102,7 +102,7 @@ function* updatePost(action){
     
     yield put({type:pending(Actions.UPDATE_USER_POST)});
     try{
-        yield call(axios.put, `${API_URL}/users/posts`, {...post}, addTokenConfig);
+        yield call(axios.put, `${API_URL}/users/posts`, {...post}, addTokenConfig());
         yield put({type: success(Actions.UPDATE_USER_POST), payload: post});
     }catch(err){
         yield put({type: failure(Actions.UPDATE_USER_POST), payload: err});

@@ -9,7 +9,8 @@ import {
   FormControl,
   FormLabel,
   Button,
-  Alert
+  Alert,
+  Spinner
 } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -18,9 +19,9 @@ import style from "./LoginForm.module.scss";
 import _ from 'lodash';
 
 const LoginForm = (props) => {
-  const {loginUser, error} = props;
+  const {loginUser, error, formStatus} = props;
   const history = useHistory();
-
+  
   const handleSignUp = () => {
     history.push("/register");
   };
@@ -42,12 +43,10 @@ const LoginForm = (props) => {
         password: "",
       }}
       validationSchema={validationLoginSchema}
-      onSubmit={(values, { setSubmitting }) => {
-          const {username, password}= values;
-          loginUser({username, password});
-          setSubmitting(false);
-          if(_.isEmpty(error)) history.push('/');
-      }}
+      onSubmit={(values) => {
+        const {username, password}= values;
+        loginUser({username, password});
+    }}
     >
       {(formik) => (
         <Form onSubmit={formik.handleSubmit} className={style.form}>
@@ -87,12 +86,25 @@ const LoginForm = (props) => {
           </FormGroup>
           <Form.Row>
             <Col>
+            { formStatus === 'LOGIN_SUBMITTING' ?
+              <Button type="submit" disabled>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                <span className="sr-only">Loading...</span>
+              </Button>
+              :
               <Button
                 type="submit"
-                disabled={formik.isSubmitting || !formik.isValid}
+                disabled={!formik.isValid}
               >
                 Login
               </Button>
+            }
             </Col>
             <Col>
               <Button
