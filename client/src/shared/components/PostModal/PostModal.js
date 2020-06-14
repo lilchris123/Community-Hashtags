@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import {
   Modal,
   Button,
-  Badge,
   Form,
   Col,
   FormGroup,
@@ -41,9 +40,9 @@ const PostModal = (props) => {
           Create Post
         </Button>
       ) : (
-        <Badge className={`${style.badge}`} variant="primary" onClick={handleShow}>
+        <Button size='sm' className={`${style['btn-sm']}`} variant="outline-primary" onClick={handleShow}>
           edit
-        </Badge>
+        </Button>
       )}
 
       <Modal show={show} onHide={handleClose} centered>

@@ -29,7 +29,7 @@ function App(){
       <Redirect path='*' to='/' component={MainContentContainer}/>
       </Switch>
       
-      <footer className={`${style.footer} d-flex justify-content-center align-content-end`}>
+      <footer className={`${style.footer} d-flex justify-content-center align-content-center`}>
         <p>Copyright © 2020 Chris Mayol. All Rights Reserved.</p>
       </footer>
     </Router>

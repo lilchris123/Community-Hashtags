@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Categories from "../../shared/components/CategoriesDisplay/Categories";
 import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
-import style from './Categories.module.scss';
+//import style from './Categories.module.scss';
 
 class CategoriesView extends Component {
   componentDidMount() {
@@ -14,7 +14,7 @@ class CategoriesView extends Component {
   render() {
     const { categories, isLoading } = this.props;
     return (
-      <div className={`${style.content}`}>
+      <div className='content'>
         <h3 className="display-5 d-flex justify-content-center text-capitalize">
           List of Categories
         </h3>

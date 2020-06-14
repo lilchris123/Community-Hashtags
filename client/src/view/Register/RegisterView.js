@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import RegisterForm from "../../shared/components/RegisterForm/RegisterForm";
-// import style from './Register.module.scss';
+ import style from './Register.module.scss';
 
 export default class RegisterView extends Component {
 
@@ -13,7 +13,7 @@ export default class RegisterView extends Component {
   render() {
     const {user, registerUser, error, formStatus} =this.props;
     return (
-      <div className='mainContent'>
+      <div className={`${style.content}`}>
         <div className="d-flex justify-content-center my-3">
           <h2>Register</h2>
         </div>
