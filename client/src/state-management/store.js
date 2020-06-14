@@ -7,12 +7,11 @@ const enhancers = [];
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
 
-const composedEnhancers =compose(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store= createStore(rootReducer, initialState, composeEnhancers(
     applyMiddleware(...middleware),
-    // eslint-disable-next-line no-underscore-dangle
-    ...enhancers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
-const store= createStore(rootReducer, initialState, composedEnhancers);
+    ...enhancers
+));
 sagaMiddleware.run(rootSaga);
 
 export default store;
