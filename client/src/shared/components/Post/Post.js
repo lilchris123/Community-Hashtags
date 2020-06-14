@@ -6,7 +6,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from "react";
 import PropTypes from "prop-types";
-import { Badge, FormGroup, FormControl, Col } from "react-bootstrap";
+import { Button, FormGroup, FormControl, Col } from "react-bootstrap";
 import { useHistory } from 'react-router-dom'
 import PostModal from "../PostModal/PostModal";
 import style from "./Post.module.scss";
@@ -24,7 +24,7 @@ const Post = (props) => {
   } = props;
   const history = useHistory();
   const isEditable = post.createdBy === currentUser;
-  const badgeColor = isCopied === false ? "info" : "success";
+  const badgeColor = isCopied === false ? "outline-info" : "outline-success";
   const copyBtnText = isCopied === false ? "copy" : "copied";
   let isReported = false;
 
@@ -83,32 +83,36 @@ const Post = (props) => {
             </i>
           )}
           <div>
-            <Badge
+            <Button
+              size='sm'
               variant={badgeColor}
-              className={`${style.badge} mr-2`}
+              className={`${style['btn-sm']} mr-2`}
               onClick={() => onCopy(post._id)}
             >
               {copyBtnText}
-            </Badge>
+            </Button>
             {currentUser && !isEditable && (
-              <Badge
-                variant="warning"
-                className={`${style.disabled}`}
+              <Button
+                disabled
+                size='sm'
+                variant="outline-warning"
+                className={`${style['btn-sm']}`}
                 onClick={() => {
                   isReported = !isReported;
                 }}
               >
                 {isReported === false ? "report" : "reported"}
-              </Badge>
+              </Button>
             )}
             {isEditable && (
-              <Badge
-                variant="danger"
-                className={`${style.badge}`}
+              <Button
+                size='sm'
+                variant="outline-danger"
+                className={`${style['btn-sm']}`}
                 onClick={() => onRemove(post._id)}
               >
                 remove
-              </Badge>
+              </Button>
             )}
           </div>
         </div>

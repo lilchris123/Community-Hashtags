@@ -13,7 +13,7 @@ export default class LoginView extends Component {
   render() {
     const {user, loginUser, error, formStatus} =this.props;
     return (
-      <div className='mainContent'>
+      <div className='content'>
         <div className="d-flex justify-content-center my-3">
           <h2 className='display-5'>Login</h2>
         </div>

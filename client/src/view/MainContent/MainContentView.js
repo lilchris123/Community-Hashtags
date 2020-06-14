@@ -51,7 +51,7 @@ export default class MainContentView extends Component {
         <div className={`${style.content}`}>
           <h3 className="display-5 d-flex justify-content-center">
             {" "}
-            Top HashTags
+            Top Hashtags
           </h3>
           {(isLoadingMainContent.filter(item => !/LIKE/i.test(item)).length > 0 || isLoadingUser.length > 0) && (
           <LoadingOverlay />

@@ -85,7 +85,7 @@ const LoginForm = (props) => {
             </Col>
           </FormGroup>
           <Form.Row>
-            <Col>
+            <Col className='d-flex justify-content-center'>
             { formStatus === 'LOGIN_SUBMITTING' ?
               <Button type="submit" disabled>
                 <Spinner
@@ -106,7 +106,7 @@ const LoginForm = (props) => {
               </Button>
             }
             </Col>
-            <Col>
+            <Col className='d-flex justify-content-center'>
               <Button
                 type="button"
                 variant="light"

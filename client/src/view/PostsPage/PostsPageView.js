@@ -29,7 +29,7 @@ class PostsPageView extends Component {
   render() {
     const { categoryData, copiedHashtags, user, isLoading } = this.props;
     return (
-      <div className="mainContent">
+      <div className="content">
         <h3 className="display-5 d-flex justify-content-center text-capitalize">
           {categoryData.name}
         </h3>

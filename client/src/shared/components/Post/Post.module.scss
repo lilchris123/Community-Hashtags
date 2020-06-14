@@ -1,10 +1,10 @@
 @media screen and (max-width: 600px){
   .hashtags-container {
-    height: 20vh;
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
     font-size: .5rem;
+    padding: 1em;
   }
   .textarea{
     font-size: .6rem !important;
@@ -13,11 +13,11 @@
 }
 @media screen and (min-width: 600px){
   .hashtags-container {
-    height: 25vh;
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
     font-size: .8rem;
+    padding: 1em;
   }
   .textarea{
     font-size: .9rem !important;
@@ -27,11 +27,11 @@
 
 @media screen and (min-width: 768px){
   .hashtags-container {
-    height: 30vh;
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
     font-size: 1rem;
+    padding: 1em;
   }
   .textarea{
     font-size: 1.2rem !important;
@@ -41,11 +41,11 @@
 
 @media screen and (min-width: 992px){
   .hashtags-container {
-    height: 30vh;
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
     font-size: 1rem;
+    padding: 1em;
   }
   .textarea{
     font-size: 1.2rem !important;
@@ -76,4 +76,8 @@
   }
   div.hashtags-stat-container > i.liked{
     color: rgb(172, 1, 1);
+  }
+
+  .btn-sm{
+    padding: .1rem .2rem !important;
   }

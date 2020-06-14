@@ -52,7 +52,7 @@ const MyPageView = (props) => {
 
   return (
     <>
-      <div className={`mainContent ${style.padding}`}>
+      <div className={`content ${style.padding}`}>
         <Container>
           <Row>
             <Col xs={12} sm={6}>
