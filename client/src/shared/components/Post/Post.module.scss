@@ -30,11 +30,11 @@
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
-    font-size: 1rem;
+    font-size: .9rem;
     padding: 1em;
   }
   .textarea{
-    font-size: 1.2rem !important;
+    font-size: 1.1rem !important;
     resize: none;
 }
 }
@@ -43,16 +43,21 @@
   .hashtags-container {
     border: 2px solid gray;
     border-radius: 8px;
-    text-overflow: "hidden";
+    overflow: hidden;
     font-size: 1rem;
     padding: 1em;
   }
   .textarea{
     font-size: 1.2rem !important;
     resize: none;
+  }
 }
-}
-
+  .description{
+    margin-top: .1em;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .hashtags-container:hover {
     border: 2px solid blue;
   }
@@ -62,7 +67,7 @@
   
   .hashtags-stat-container {
     border-top: 1px solid gray;
-    padding-top: 2px;
+    padding-top: .5em;
     display: flex;
     justify-content: space-between;
   }
@@ -80,4 +85,11 @@
 
   .btn-sm{
     padding: .1rem .2rem !important;
+  }
+
+  i{
+    max-width: 50%;
+    span{
+      color: rgb(6, 16, 61);
+    }
   }
