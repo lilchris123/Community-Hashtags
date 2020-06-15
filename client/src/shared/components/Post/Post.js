@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { Button, FormGroup, FormControl, Col } from "react-bootstrap";
 import { useHistory } from 'react-router-dom'
 import PostModal from "../PostModal/PostModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
 import style from "./Post.module.scss";
 
 const Post = (props) => {
@@ -107,14 +108,7 @@ const Post = (props) => {
               </Button>
             )}
             {isEditable && (
-              <Button
-                size='sm'
-                variant="outline-danger"
-                className={`${style['btn-sm']}`}
-                onClick={() => onRemove(post._id)}
-              >
-                remove
-              </Button>
+              <DeleteModal post={post} onRemove={onRemove}/>
             )}
           </div>
         </div>
