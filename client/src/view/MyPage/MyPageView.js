@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Category from "../../shared/components/Category/Category";
 import PostModal from "../../shared/components/PostModal/PostModal";
 import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
+import NoPosts from '../../shared/components/NoPosts/NoPosts';
 import style from "./MyPage.module.scss";
 
 const MyPageView = (props) => {
@@ -51,7 +52,6 @@ const MyPageView = (props) => {
   };
 
   return (
-    <>
       <div className={`content ${style.padding}`}>
         <Container>
           <Row>
@@ -68,6 +68,7 @@ const MyPageView = (props) => {
           <LoadingOverlay />
         )}
         <Container>
+          { posts.posts && posts.posts.length ?
           <Row className="my-3">
             <Category
               category={posts}
@@ -79,9 +80,11 @@ const MyPageView = (props) => {
               currentUser={user && user.username}
             />
           </Row>
+          :
+          <NoPosts text='No Post Available'/>
+          }
         </Container>
       </div>
-    </>
   );
 };
 

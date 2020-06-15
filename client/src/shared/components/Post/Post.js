@@ -71,7 +71,8 @@ const Post = (props) => {
         <div className={`${style["hashtags-stat-container"]}`}>
           {!post.likedBy.includes(currentUser) ? (
             <i className="fa fa-heart" role="button" onClick={() => canLike()}>
-              {` ${post.likedBy.length}`}
+              {` ${post.likedBy.length}`} 
+              <span>{ post.likedBy.length > 2 ? ` liked by ${post.likedBy[post.likedBy.length-1]} and ${post.likedBy.length-1} others`: '' }</span>
             </i>
           ) : (
             <i
@@ -80,6 +81,7 @@ const Post = (props) => {
               onClick={() => canLike()}
             >
              {` ${post.likedBy.length}`}
+             <span>{ post.likedBy.length > 2 ? ` liked by ${post.likedBy[post.likedBy.length-1]} and ${post.likedBy.length-1} others`: '' }</span>
             </i>
           )}
           <div>
