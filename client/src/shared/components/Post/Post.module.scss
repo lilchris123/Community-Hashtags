@@ -3,26 +3,28 @@
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
-    font-size: .5rem;
+    font-size: .8rem;
     padding: 1em;
+
+    textarea{
+      font-size: .8rem !important;
+      resize: none;
   }
-  .textarea{
-    font-size: .6rem !important;
-    resize: none;
-}
+  }
 }
 @media screen and (min-width: 600px){
   .hashtags-container {
     border: 2px solid gray;
     border-radius: 8px;
     text-overflow: "hidden";
-    font-size: .8rem;
+    font-size: 1rem;
     padding: 1em;
+
+    textarea{
+      font-size: 1.1rem !important;
+      resize: none;
+    }
   }
-  .textarea{
-    font-size: .9rem !important;
-    resize: none;
-}
 }
 
 @media screen and (min-width: 768px){
@@ -32,11 +34,12 @@
     text-overflow: "hidden";
     font-size: .9rem;
     padding: 1em;
+
+    textarea{
+      font-size: 1.1rem !important;
+      resize: none;
+    }
   }
-  .textarea{
-    font-size: 1.1rem !important;
-    resize: none;
-}
 }
 
 @media screen and (min-width: 992px){
@@ -46,10 +49,11 @@
     overflow: hidden;
     font-size: 1rem;
     padding: 1em;
-  }
-  .textarea{
-    font-size: 1.2rem !important;
-    resize: none;
+    
+    textarea{
+      font-size: 1.2rem !important;
+      resize: none;
+    }
   }
 }
   .description{
@@ -59,7 +63,7 @@
     text-overflow: ellipsis;
   }
   .hashtags-container:hover {
-    border: 2px solid blue;
+    border: 2px solid rgb(71, 71, 71);
   }
   .form{
     margin: 2vh 0vh 4vh 0vh;
@@ -88,7 +92,7 @@
   }
 
   i{
-    max-width: 50%;
+    max-width: 80%;
     span{
       color: rgb(6, 16, 61);
     }
