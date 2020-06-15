@@ -24,10 +24,14 @@ router.route('/login').post( (req, res) => {
 router.route('/register').post( async (req,res) => {
 
     const { firstName, lastName, email, username, password} = req.body;
+    const doesUserExist = await Users.exists({ username: username });
+    if(doesUserExist){
+        return res.status(400).json('User already exist');
+    }
     let hashedPassword;
     try{
         hashedPassword= await bcrypt.hash(password, 10);
-    }catch(err){ return res.status(400).send('Password field empty')}
+    }catch(err){ return res.status(400).json('Password field empty')}
     
     const newUser= new Users({
         firstName, 
