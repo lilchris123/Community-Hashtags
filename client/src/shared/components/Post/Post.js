@@ -4,10 +4,10 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from "react";
+import React, { useRef } from "react";
 import PropTypes from "prop-types";
 import { Button, FormGroup, FormControl, Col } from "react-bootstrap";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import PostModal from "../PostModal/PostModal";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import style from "./Post.module.scss";
@@ -24,6 +24,7 @@ const Post = (props) => {
     currentUser,
   } = props;
   const history = useHistory();
+  const textRef = useRef("");
   const isEditable = post.createdBy === currentUser;
   const badgeColor = isCopied === false ? "outline-info" : "outline-success";
   const copyBtnText = isCopied === false ? "copy" : "copied";
@@ -33,14 +34,19 @@ const Post = (props) => {
     if (currentUser && post.likedBy.includes(currentUser)) {
       onLike(post._id);
       post.likedBy = post.likedBy.filter((user) => user !== currentUser);
-    } else if (currentUser && !post.likedBy.includes(currentUser)) {
+    } 
+    else if (currentUser && !post.likedBy.includes(currentUser)) {
       onLike(post._id);
       post.likedBy = [...post.likedBy, currentUser];
-    }
-    else
-      history.push('/login');
+    } 
+    else history.push("/login");
   };
 
+  const copyToClipboard = () => {
+    textRef.current.select();
+    document.execCommand("copy");
+  };
+  
   return (
     <Col xs={12} sm={6}>
       <div className={`${style["hashtags-container"]} col my-2`}>
@@ -66,14 +72,21 @@ const Post = (props) => {
             rows={3}
             value={post.hashtags.map((i) => `${i} `)}
             className={style.textarea}
+            ref={textRef}
             readOnly
           />
         </FormGroup>
         <div className={`${style["hashtags-stat-container"]}`}>
           {!post.likedBy.includes(currentUser) ? (
             <i className="fa fa-heart" role="button" onClick={() => canLike()}>
-              {` ${post.likedBy.length}`} 
-              <span>{ post.likedBy.length > 2 ? ` liked by ${post.likedBy[post.likedBy.length-1]} and ${post.likedBy.length-1} others`: '' }</span>
+              {` ${post.likedBy.length}`}
+              <span>
+                {post.likedBy.length > 2
+                  ? ` liked by ${post.likedBy[post.likedBy.length - 1]} and ${
+                      post.likedBy.length - 1
+                    } others`
+                  : ""}
+              </span>
             </i>
           ) : (
             <i
@@ -81,25 +94,34 @@ const Post = (props) => {
               role="button"
               onClick={() => canLike()}
             >
-             {` ${post.likedBy.length}`}
-             <span>{ post.likedBy.length > 2 ? ` liked by ${post.likedBy[post.likedBy.length-1]} and ${post.likedBy.length-1} others`: '' }</span>
+              {` ${post.likedBy.length}`}
+              <span>
+                {post.likedBy.length > 2
+                  ? ` liked by ${post.likedBy[post.likedBy.length - 1]} and ${
+                      post.likedBy.length - 1
+                    } others`
+                  : ""}
+              </span>
             </i>
           )}
           <div>
             <Button
-              size='sm'
+              size="sm"
               variant={badgeColor}
-              className={`${style['btn-sm']} mr-2`}
-              onClick={() => onCopy(post._id)}
+              className={`${style["btn-sm"]} mr-2`}
+              onClick={() => {
+                copyToClipboard();
+                onCopy(post._id);
+              }}
             >
               {copyBtnText}
             </Button>
             {currentUser && !isEditable && (
               <Button
                 disabled
-                size='sm'
+                size="sm"
                 variant="outline-warning"
-                className={`${style['btn-sm']}`}
+                className={`${style["btn-sm"]}`}
                 onClick={() => {
                   isReported = !isReported;
                 }}
@@ -107,9 +129,7 @@ const Post = (props) => {
                 {isReported === false ? "report" : "reported"}
               </Button>
             )}
-            {isEditable && (
-              <DeleteModal post={post} onRemove={onRemove}/>
-            )}
+            {isEditable && <DeleteModal post={post} onRemove={onRemove} />}
           </div>
         </div>
       </div>

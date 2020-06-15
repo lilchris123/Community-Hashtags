@@ -17,6 +17,7 @@ import style from "./Nav.module.scss";
 export default function NavView(props) {
   const { isLoggedIn, getUserFromToken } = props;
   const [query, setQuery] = useState("");
+  const [expanded, setExpanded] =useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -36,12 +37,14 @@ export default function NavView(props) {
       collapseOnSelect
       variant="dark"
       expand="lg"
+      expanded={expanded}
       className={`${style.bgColor}`}
     >
       <NavLink
         activeClassName={style.activeLink}
         className={`navbar-brand ${style.navColor}`}
         to="/"
+        onClick={() => setExpanded(false)}
       >
         Community Hashtags
       </NavLink>
@@ -49,6 +52,7 @@ export default function NavView(props) {
       <Navbar.Toggle
         aria-controls="responsive-navbar-nav"
         className={`${style.navColor}`}
+        onClick={() => setExpanded(expanded ? false : "expanded")}
       />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav variant="dark" className="mr-auto">
@@ -57,6 +61,7 @@ export default function NavView(props) {
               activeClassName={style.activeLink}
               className={`nav-link ${style.navColor}`}
               to="/"
+              onClick={() => setExpanded(false)}
             >
               Home
             </NavLink>
@@ -66,6 +71,7 @@ export default function NavView(props) {
               activeClassName={style.activeLink}
               className={`nav-link ${style.navColor}`}
               to="/categories"
+              onClick={() => setExpanded(false)}
             >
               Categories
             </NavLink>
@@ -76,6 +82,7 @@ export default function NavView(props) {
                 activeClassName={style.activeLink}
                 className={`nav-link ${style.navColor}`}
                 to="/login"
+                onClick={() => setExpanded(false)}
               >
                 Login
               </NavLink>
@@ -84,6 +91,7 @@ export default function NavView(props) {
                 activeClassName={style.activeLink}
                 className={`nav-link ${style.navColor}`}
                 to="/mypage"
+                onClick={() => setExpanded(false)}
               >
                 My Page
               </NavLink>
