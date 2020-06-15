@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import style from "./App.module.scss";
 import NavContainer from "./view/Nav/NavContainer";
 import MainContentContainer from './view/MainContent/MainContentContainer';
@@ -13,7 +13,7 @@ import SearchContainer from './view/Search/SearchContainer';
 
 function App(){
   return(
-    <Router>
+    <>
       <header>
         <NavContainer/>
       </header>
@@ -32,7 +32,7 @@ function App(){
       <footer className={`${style.footer} d-flex justify-content-center align-content-center`}>
         <p>Copyright © 2020 Chris Mayol. All Rights Reserved.</p>
       </footer>
-    </Router>
+    </>
   );
 }
 
