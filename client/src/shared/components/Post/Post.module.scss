@@ -1,3 +1,18 @@
+@media screen and (max-width: 400px){
+  .hashtags-container {
+    border: 2px solid gray;
+    border-radius: 8px;
+    text-overflow: "hidden";
+    font-size: .9rem;
+    padding: 1em;
+
+    textarea{
+      font-size: 1rem !important;
+      resize: none;
+  }
+  }
+}
+
 @media screen and (max-width: 600px){
   .hashtags-container {
     border: 2px solid gray;
