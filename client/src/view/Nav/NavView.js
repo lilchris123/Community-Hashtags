@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { NavLink, useHistory } from "react-router-dom";
 import {
@@ -17,12 +17,23 @@ import style from "./Nav.module.scss";
 export default function NavView(props) {
   const { isLoggedIn, getUserFromToken } = props;
   const [query, setQuery] = useState("");
-  const [expanded, setExpanded] =useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const navRef= useRef();
   const history = useHistory();
+
+  const handleClick=(e)=>{
+    if(!navRef.current.contains(e.target))
+    setExpanded(false);
+  }
 
   useEffect(() => {
     if (!isLoggedIn && localStorage.getItem("token") !== null)
       getUserFromToken();
+    document.addEventListener('click', handleClick, false);
+
+    return ()=>{
+    document.removeEventListener('click', handleClick, false);
+    }
   });
 
   const handleSearch = () => {
@@ -39,6 +50,7 @@ export default function NavView(props) {
       expand="lg"
       expanded={expanded}
       className={`${style.bgColor}`}
+      ref={navRef}
     >
       <NavLink
         activeClassName={style.activeLink}

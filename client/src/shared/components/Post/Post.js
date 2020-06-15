@@ -71,7 +71,6 @@ const Post = (props) => {
             as="textarea"
             rows={3}
             value={post.hashtags.map((i) => `${i} `)}
-            className={style.textarea}
             ref={textRef}
             readOnly
           />
