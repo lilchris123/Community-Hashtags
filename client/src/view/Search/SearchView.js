@@ -63,7 +63,6 @@ class SearchView extends Component {
     );
   }
 }
-
 SearchView.propTypes = {
     posts: PropTypes.shape().isRequired,
     copiedHashtags: PropTypes.string,
