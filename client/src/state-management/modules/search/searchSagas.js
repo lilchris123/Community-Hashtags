@@ -7,7 +7,6 @@ import {API_URL} from '../../../shared/constants/api';
 
 function* fetchPostsBySearch(action){
     const { query } =action;
-    console.log(query);
     yield put({type: pending(Actions.FETCH_POSTS_BY_SEARCH)});
     try{
         const data = yield call(axios.get,`${API_URL}/posts/search/${query}`);

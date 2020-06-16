@@ -33,8 +33,10 @@ router.get('/category/:category', (req,res) => {
     .catch(err => res.status(400).json(`Error ${err}`));
 });
 
-router.get('/search/:query', (req,res) => {
-    Post.find({ hashtags: req.params.query})
+router.get('/search/:name', (req,res) => {
+    let { name } =req.params;
+    name= `#${name.toLowerCase()}`;
+    Post.find({ hashtags: name})
     .then(data => res.json({
         posts: data
     }))
