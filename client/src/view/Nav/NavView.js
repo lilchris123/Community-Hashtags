@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { NavLink, useHistory } from "react-router-dom";
+import { Formik } from "formik";
+import * as Yup from "yup";
 import {
   Navbar,
   NavItem,
@@ -9,39 +11,35 @@ import {
   Button,
   FormGroup,
   FormControl,
-  OverlayTrigger,
-  Tooltip,
 } from "react-bootstrap";
 import style from "./Nav.module.scss";
 
 export default function NavView(props) {
   const { isLoggedIn, getUserFromToken } = props;
-  const [query, setQuery] = useState("");
   const [expanded, setExpanded] = useState(false);
-  const navRef= useRef();
+  const navRef = useRef();
   const history = useHistory();
 
-  const handleClick=(e)=>{
-    if(!navRef.current.contains(e.target))
-    setExpanded(false);
-  }
+  const handleClick = (e) => {
+    if (!navRef.current.contains(e.target)) setExpanded(false);
+  };
 
   useEffect(() => {
     if (!isLoggedIn && localStorage.getItem("token") !== null)
       getUserFromToken();
-    document.addEventListener('click', handleClick, false);
+    document.addEventListener("click", handleClick, false);
 
-    return ()=>{
-    document.removeEventListener('click', handleClick, false);
-    }
+    return () => {
+      document.removeEventListener("click", handleClick, false);
+    };
   });
 
-  const handleSearch = () => {
-    history.push({
-      pathname: "/search",
-      search: `?query=${query}`,
-    });
-  };
+  const validationSearchSchema = Yup.object({
+    search: Yup.string()
+      .max(40, "Max of 40 characters allowed")
+      .matches(/^\w+$/i,'Must be 1 word containg no symbols')
+      .required("Required")
+  });
 
   return (
     <Navbar
@@ -110,35 +108,49 @@ export default function NavView(props) {
             )}
           </NavItem>
         </Nav>
-        <Form onSubmit={handleSearch} inline className=" my-2 my-lg-0">
-          <FormGroup>
-            <FormControl
-              className="mr-sm-2"
-              type="text"
-              placeholder="Search"
-              aria-label="Search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </FormGroup>
-          <OverlayTrigger
-            overlay={<Tooltip id="tooltip-disabled">In development</Tooltip>}
-            placement="bottom"
-          >
-            <span className="d-inline-block">
-              <Button
-                size="lg"
-                variant="outline-success"
-                className="my-2 my-sm-0 ml-3 mb-4"
-                type="submit"
-                disabled
-                style={{ pointerEvents: "none" }}
-              >
-                Search
-              </Button>
-            </span>
-          </OverlayTrigger>
-        </Form>
+        <Formik
+          initialValues={{
+            search: ""
+          }}
+          validationSchema={validationSearchSchema}
+          onSubmit={(values) => history.push({
+            pathname: "/search",
+            search: `?name=${values.search.toLowerCase()}`
+          })}
+        >
+          {(formik) => (
+            <Form onSubmit={formik.handleSubmit} inline className=" my-2 my-lg-0">
+              <FormGroup controlId="search">
+                <div>
+                <FormControl
+                  name="search"
+                  className="mr-sm-2"
+                  type="text"
+                  placeholder="Search by hashtag"
+                  aria-label="Search"
+                  isValid={formik.touched.search && !formik.errors.search}
+                  isInvalid={formik.touched.search && formik.errors.search}
+                  {...formik.getFieldProps("search")}
+                />
+                <Form.Control.Feedback type="invalid">
+                  {formik.errors.search}
+                </Form.Control.Feedback>
+                </div>
+              </FormGroup>
+              <span className="d-inline-block">
+                <Button
+                  size="lg"
+                  variant="outline-success"
+                  className="my-2 my-sm-0 ml-3 mb-4"
+                  type="submit"
+                  disabled={!formik.isValid}
+                >
+                  Search
+                </Button>
+              </span>
+            </Form>
+          )}
+        </Formik>
       </Navbar.Collapse>
     </Navbar>
   );

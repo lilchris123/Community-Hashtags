@@ -2,15 +2,28 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Container, Row } from 'react-bootstrap';
 import Category from "../../shared/components/Category/Category";
+import NoPosts from "../../shared/components/NoPosts/NoPosts";
+import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
+import _ from 'lodash';
 
 class SearchView extends Component {
     componentDidMount(){
-        const { fetchPostsBySearch, location } = this.props;
-
-        const query=location.search.split('=')[1]
-        if(location.search.split('=')[1] !== 'undefined')
-            fetchPostsBySearch(query);
+        const { fetchPostsBySearch, location} = this.props;
+        const params = new URLSearchParams(location.search);
+        const search = params.get('name');
+        if(search)
+          fetchPostsBySearch(search);
     }
+    componentDidUpdate(prevProps){
+      const { fetchPostsBySearch, location} = this.props;
+        console.log(location.search);
+        if(location.search === prevProps.location.search)
+          return;
+        const params = new URLSearchParams(location.search);
+        const search = params.get('name');
+        fetchPostsBySearch(search);
+    }
+    
 
     handleCopy = (id) => {
         const { updateCopiedHashtags } = this.props;
@@ -23,14 +36,16 @@ class SearchView extends Component {
       };
 
     render() {
-        const { posts, copiedHashtags, user, location } = this.props;
-        const query=location.search ? location.search.split('=')[1]: '';
+        const { posts, copiedHashtags, user, location, isLoading } = this.props;
+        const search=location.search ? location.search.split('=')[1]: '';
     return (
-      <div className="mainContent">
-        <h3 className="display-5 d-flex justify-content-center text-capitalize">
-          {`Search: "${query}"`}
+      <div className="content">
+        <h3 className="display-5 d-flex justify-content-center">
+          {`Search: "${search}"`}
         </h3>
         <Container>
+          {!_.isEmpty(isLoading) && <LoadingOverlay/>}
+          { posts.posts && posts.posts.length ?
           <Row className="my-3">
             <Category
               category={posts}
@@ -40,6 +55,9 @@ class SearchView extends Component {
               currentUser={user && user.username}
             />
           </Row>
+          :
+          <NoPosts text="No Post Found"/>
+          }
         </Container>
       </div>
     );
