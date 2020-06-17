@@ -66,7 +66,7 @@ const PostModal = (props) => {
               onUpdate({
                 ...post,
                 description: values.description,
-                hashtags: values.hashtags.match(/#\w+/g),
+                hashtags: values.hashtags.match(/#\w+/g).map(tag=> tag.toLowerCase()),
                 category: values.category
               });
             

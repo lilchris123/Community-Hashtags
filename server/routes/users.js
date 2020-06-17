@@ -7,7 +7,7 @@ const Post= require('../model/post');
 const { authenticateToken, authenticateAdmin }= require('../middleware/auth-middleware');
 
 router.route('/login').post( (req, res) => {
-    const { username, password } = req.body;
+    let { username, password } = req.body;
 
     Users.findOne({ username })
     .then(async (user) => {
@@ -23,7 +23,8 @@ router.route('/login').post( (req, res) => {
 
 router.route('/register').post( async (req,res) => {
 
-    const { firstName, lastName, email, username, password} = req.body;
+    let { firstName, lastName, email, username, password} = req.body;
+    username= username.toLowerCase();
     const doesUserExist = await Users.exists({ username: username });
     if(doesUserExist){
         return res.status(400).json('User already exist');
@@ -59,9 +60,10 @@ router.route('/posts').get(authenticateToken,(req,res)=>{
 
 .post(authenticateToken,(req,res)=>{
     const { hashtags, description, category} = req.body;
+    
     const newPost= new Post({
         createdBy: req.user.username,
-        hashtags,
+        hashtags: hashtags.map(tag => tag.toLowerCase()),
         likes: 0,
         description,
         likedBy: [],
@@ -75,7 +77,7 @@ router.route('/posts').get(authenticateToken,(req,res)=>{
 .put(authenticateToken,(req,res)=>{
     const { _id, hashtags, description, category} = req.body;
     Post.findByIdAndUpdate(_id,{
-        hashtags,
+        hashtags: hashtags.map(tag => tag.toLowerCase()),
         description,
         category
     }).then((data)=> res.status(200).json(data)).catch(err=> res.status(400).json(`Error ${err}`));
