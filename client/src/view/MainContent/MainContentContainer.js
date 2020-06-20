@@ -6,10 +6,9 @@ import MainContentView from './MainContentView';
 
 const mapStateToProps = (state)=> {
     return {
-        isLoadingMainContent: mainContentSelector.getLoading(state),
-        isLoadingUser: userSelectors.getLoading(state),
+        isLoading: mainContentSelector.getLoading(state),
         categories: mainContentSelector.getCategories(state),
-        categoryData: mainContentSelector.getCategoryData(state),
+        posts: mainContentSelector.getCategoryData(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state),
         user: userSelectors.getUser(state)
     }

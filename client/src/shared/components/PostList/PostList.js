@@ -3,17 +3,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Post from '../Post/Post';
 
-const Category = (props) => {
+const PostList = (props) => {
      // function to list the hash tags
-    const { category, copiedHashtags, handleLike, handleCopy, handleUpdate, handleCreate, handleRemove, currentUser } =props;
-    if(category.posts)
-        return category.posts.map(p =>
+    const { posts, copiedHashtags, handleLike, handleCopy, handleUpdate, handleCreate, handleRemove, currentUser } =props;
+    if(posts.posts)
+        return posts.posts.map(p =>
             <Post post={p} key={p._id} isCopied={ p._id === copiedHashtags } onLike={handleLike} handleCreate={handleCreate} handleUpdate={handleUpdate} onCopy={handleCopy} onRemove={handleRemove} currentUser={currentUser}/>
         );
     return null;
 }
-Category.propTypes ={
-    category: PropTypes.shape().isRequired,
+PostList.propTypes ={
+    posts: PropTypes.shape().isRequired,
     copiedHashtags: PropTypes.string,
     handleLike: PropTypes.func,
     handleCopy: PropTypes.func,
@@ -22,7 +22,7 @@ Category.propTypes ={
     handleCreate: PropTypes.func,
     currentUser: PropTypes.string
 }
-Category.defaultProps ={
+PostList.defaultProps ={
     copiedHashtags: null,
     handleLike: () => {},
     handleCopy: () => {},
@@ -31,4 +31,4 @@ Category.defaultProps ={
     handleCreate: () => {},
     currentUser: null
 }
-export default Category;
+export default PostList;

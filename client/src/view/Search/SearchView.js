@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Container, Row } from 'react-bootstrap';
-import Category from "../../shared/components/Category/Category";
-import NoPosts from "../../shared/components/NoPosts/NoPosts";
-import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
-import _ from 'lodash';
+import PostsContainer from "../../shared/components/PostsContainer/PostsContainer";
 
 class SearchView extends Component {
     componentDidMount(){
@@ -23,42 +19,32 @@ class SearchView extends Component {
         const search = params.get('name');
         fetchPostsBySearch(search);
     }
-    
 
     handleCopy = (id) => {
         const { updateCopiedHashtags } = this.props;
         updateCopiedHashtags(id);
       };
-    
+
+      handleLike= (id) => {
+        const { likePost }= this.props;
+        likePost(id);
+      }
       handleRemove = (id) => {
         const { removePost } = this.props;
         removePost(id);
       };
+      handleUpdate = (post) => {
+        const { updatePost } = this.props;
+        updatePost(post);
+      };
 
     render() {
-        const { posts, copiedHashtags, user, location, isLoading } = this.props;
+        const {location} = this.props;
         const search=location.search ? location.search.split('=')[1]: '';
     return (
       <div className="content">
-        <h3 className="display-5 d-flex justify-content-center">
-          {`Search: "${search}"`}
-        </h3>
-        <Container>
-          {!_.isEmpty(isLoading) && <LoadingOverlay/>}
-          { posts.posts && posts.posts.length ?
-          <Row className="my-3">
-            <Category
-              category={posts}
-              copiedHashtags={copiedHashtags}
-              handleCopy={this.handleCopy}
-              handleRemove={this.handleRemove}
-              currentUser={user && user.username}
-            />
-          </Row>
-          :
-          <NoPosts text="No Post Found"/>
-          }
-        </Container>
+        <PostsContainer {...this.props} handleCopy={this.handleCopy} handleUpdate={this.handleUpdate} handleLike={this.handleLike} 
+          handleRemove={this.handleRemove} title={`Search: "${search}"`}/>
       </div>
     );
   }

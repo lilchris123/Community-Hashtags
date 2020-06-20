@@ -9,7 +9,7 @@ import SearchView from './SearchView';
 
 const mapStateToProps = (state)=> {
     return {
-        isLoading: mainContentSelector.getLoading(state),
+        isLoading: searchSelectors.getLoading(state),
         posts: searchSelectors.getPosts(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state),
         user: userSelectors.getUser(state),

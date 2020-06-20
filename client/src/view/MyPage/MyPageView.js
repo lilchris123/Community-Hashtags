@@ -2,20 +2,15 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button, Container, Col, Row } from "react-bootstrap";
 import PropTypes from "prop-types";
-import Category from "../../shared/components/Category/Category";
 import PostModal from "../../shared/components/PostModal/PostModal";
-import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
-import NoPosts from '../../shared/components/NoPosts/NoPosts';
+import PostsContainer from '../../shared/components/PostsContainer/PostsContainer';
 import style from "./MyPage.module.scss";
 
 const MyPageView = (props) => {
   const {
-    isLoading,
     user,
     logoutUser,
-    copiedHashtags,
     fetchUserPosts,
-    posts,
   } = props;
   const history = useHistory();
 
@@ -64,26 +59,9 @@ const MyPageView = (props) => {
             </Col>
           </Row>
         </Container>
-        {isLoading.filter(item => !/LIKE/i.test(item)).length > 0 && (
-          <LoadingOverlay />
-        )}
-        <Container>
-          { posts.posts && posts.posts.length ?
-          <Row className="my-3">
-            <Category
-              category={posts}
-              copiedHashtags={copiedHashtags}
-              handleLike={handleLike}
-              handleUpdate={handleUpdate}
-              handleCopy={handleCopy}
-              handleRemove={handleRemove}
-              currentUser={user && user.username}
-            />
-          </Row>
-          :
-          <NoPosts text='No Post Available'/>
-          }
-        </Container>
+
+        <PostsContainer {...props} handleUpdate= {handleUpdate} handleLike={handleLike} handleCopy={handleCopy}
+                handleRemove={handleRemove} title='My Posts'/>
       </div>
   );
 };
