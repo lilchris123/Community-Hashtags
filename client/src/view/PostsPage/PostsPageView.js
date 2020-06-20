@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {Container, Row} from 'react-bootstrap';
-import Category from "../../shared/components/Category/Category";
-import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
+import PostsContainer from "../../shared/components/PostsContainer/PostsContainer";
 // import style from './PostsPage.module.scss';
 
 class PostsPageView extends Component {
@@ -24,36 +22,26 @@ class PostsPageView extends Component {
   handleLike= (id) => {
     const { likePost }= this.props;
     likePost(id);
-  } 
+  }
+
+  handleUpdate = (post) => {
+    const { updatePost } = this.props;
+    updatePost(post);
+  };
 
   render() {
-    const { categoryData, copiedHashtags, user, isLoading } = this.props;
+    const { posts} = this.props;
     return (
       <div className="content">
-        <h3 className="display-5 d-flex justify-content-center text-capitalize">
-          {categoryData.name}
-        </h3>
-        {isLoading.filter(item => !/LIKE/i.test(item)).length > 0 && (
-          <LoadingOverlay />)}
-        <Container>
-          <Row className="my-3">
-            <Category
-              category={categoryData}
-              copiedHashtags={copiedHashtags}
-              handleLike={this.handleLike}
-              handleCopy={this.handleCopy}
-              handleRemove={this.handleRemove}
-              currentUser={user && user.username}
-            />
-          </Row>
-        </Container>
+        <PostsContainer {...this.props} handleUpdate= {this.handleUpdate} handleLike={this.handleLike} handleCopy={this.handleCopy}
+          handleRemove={this.handleRemove} title={posts.name}/>
       </div>
     );
   }
 }
 PostsPageView.propTypes = {
   isLoading: PropTypes.arrayOf(String).isRequired,
-  categoryData: PropTypes.shape().isRequired,
+  posts: PropTypes.shape().isRequired,
   copiedHashtags: PropTypes.string,
   match: PropTypes.shape().isRequired,
   fetchHashtagsByCategory: PropTypes.func.isRequired,

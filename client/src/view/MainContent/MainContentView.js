@@ -1,10 +1,8 @@
 /* eslint-disable no-console */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Container, Row } from "react-bootstrap";
-import Category from "../../shared/components/Category/Category";
 import CategoriesContainer from "../Categories/CategoriesContainer";
-import LoadingOverlay from "../../shared/components/LoadingOverlay/LoadingOverlay";
+import PostsContainer from '../../shared/components/PostsContainer/PostsContainer';
 import style from "./MainContent.module.scss";
 
 export default class MainContentView extends Component {
@@ -39,36 +37,11 @@ export default class MainContentView extends Component {
   };
 
   render() {
-    const {
-      categoryData,
-      copiedHashtags,
-      user,
-      isLoadingMainContent,
-      isLoadingUser,
-    } = this.props;
     return (
       <>
         <div className={`${style.content}`}>
-          <h3 className="display-5 d-flex justify-content-center">
-            {" "}
-            Top Hashtags
-          </h3>
-          {(isLoadingMainContent.filter(item => !/LIKE/i.test(item)).length > 0 || isLoadingUser.length > 0) && (
-          <LoadingOverlay />
-        )}
-          <Container>
-            <Row className="my-3">
-              <Category
-                category={categoryData}
-                copiedHashtags={copiedHashtags}
-                handleLike={this.handleLike}
-                handleUpdate={this.handleUpdate}
-                handleCopy={this.handleCopy}
-                handleRemove={this.handleRemove}
-                currentUser={user && user.username}
-              />
-            </Row>
-          </Container>
+          <PostsContainer {...this.props} handleUpdate= {this.handleUpdate} handleLike={this.handleLike} handleCopy={this.handleCopy}
+                handleRemove={this.handleRemove} title='Top Hashtags'/>
         </div>
         <CategoriesContainer />
       </>
@@ -76,9 +49,8 @@ export default class MainContentView extends Component {
   }
 }
 MainContentView.propTypes = {
-  isLoadingMainContent: PropTypes.arrayOf(String).isRequired,
-  isLoadingUser: PropTypes.arrayOf(String).isRequired,
-  categoryData: PropTypes.shape().isRequired,
+  isLoading: PropTypes.arrayOf(String).isRequired,
+  posts: PropTypes.shape().isRequired,
   copiedHashtags: PropTypes.string,
   fetchCategories: PropTypes.func.isRequired,
   fetchHashtagsByCategory: PropTypes.func.isRequired,

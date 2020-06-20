@@ -8,7 +8,7 @@ import PostsPageView from './PostsPageView';
 const mapStateToProps = (state)=> {
     return {
         isLoading: mainContentSelector.getLoading(state),
-        categoryData: mainContentSelector.getCategoryData(state),
+        posts: mainContentSelector.getCategoryData(state),
         copiedHashtags: mainContentSelector.getCopiedHashtags(state),
         user: userSelectors.getUser(state)
     }
