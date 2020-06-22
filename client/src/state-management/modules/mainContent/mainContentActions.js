@@ -4,6 +4,7 @@ export const COPIED_HASHTAGS= 'COPIED_HASHTAGS';
 export const LIKE_POST= 'LIKE_POST';
 export const UPDATE_POST='UPDATE_POST';
 export const REMOVE_POST='REMOVE_POST';
+export const FETCH_POSTS_BY_SEARCH= 'FETCH_POSTS_BY_SEARCH';
 
 export const fetchCategories = () => {
     return{
@@ -43,5 +44,12 @@ export const removePost= (id) =>{
     return{
         type: REMOVE_POST,
         id
+    }
+}
+
+export const fetchPostsBySearch = (query) => {
+    return{
+        type: FETCH_POSTS_BY_SEARCH,
+        query
     }
 }

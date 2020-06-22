@@ -137,6 +137,22 @@ const mainContentReducer = (state = initialState, action) => {
           (item) => item !== Actions.REMOVE_POST
         ),
       };
+      case pending(Actions.FETCH_POSTS_BY_SEARCH):
+        return{
+            ...state,
+            isLoading: [...state.isLoading, Actions.FETCH_POSTS_BY_SEARCH]
+        }
+    case success(Actions.FETCH_POSTS_BY_SEARCH):
+    return{
+        ...state,
+        isLoading: state.isLoading.filter(item => item !== Actions.FETCH_POSTS_BY_SEARCH),
+        categoryData: payload.data
+    }
+    case failure(Actions.FETCH_POSTS_BY_SEARCH):
+    return{
+        ...state,
+        isLoading: state.isLoading.filter(item => item !== Actions.FETCH_POSTS_BY_SEARCH)
+    }
     default:
       return state;
   }
