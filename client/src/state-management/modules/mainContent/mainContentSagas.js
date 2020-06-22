@@ -71,6 +71,25 @@ function* removePost(action){
     }
 }
 
+function* fetchPostsBySearch(action){
+    const { query } =action;
+    yield put({type: pending(Actions.FETCH_POSTS_BY_SEARCH)});
+    try{
+        const data = yield call(axios.get,`${API_URL}/posts/search/${query}`);
+        yield put({type: success(Actions.FETCH_POSTS_BY_SEARCH), payload: data});
+    }catch(err){
+        yield put({type: failure(Actions.FETCH_POSTS_BY_SEARCH), payload: err})
+    }
+}
+
 export default function* mainContentRootSaga(){
-    yield all([takeLeading(Actions.FETCH_CATEGORIES, fetchCategories), takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags), takeEvery(Actions.LIKE_POST, likePost), takeEvery(Actions.UPDATE_POST, updatePost), takeEvery(Actions.REMOVE_POST, removePost)])
+    yield all([
+        takeLeading(Actions.FETCH_CATEGORIES, fetchCategories), 
+        takeEvery(Actions.FETCH_HASHTAGS_BY_NAME, fetchHashtagsByCategory), 
+        takeEvery(Actions.COPIED_HASHTAGS, copiedHashtags), 
+        takeEvery(Actions.LIKE_POST, likePost), 
+        takeEvery(Actions.UPDATE_POST, updatePost), 
+        takeEvery(Actions.REMOVE_POST, removePost),
+        takeEvery(Actions.FETCH_POSTS_BY_SEARCH, fetchPostsBySearch)
+    ])
 }

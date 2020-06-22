@@ -12,7 +12,6 @@ class SearchView extends Component {
     }
     componentDidUpdate(prevProps){
       const { fetchPostsBySearch, location} = this.props;
-        console.log(location.search);
         if(location.search === prevProps.location.search)
           return;
         const params = new URLSearchParams(location.search);
