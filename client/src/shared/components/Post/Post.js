@@ -70,7 +70,7 @@ const Post = (props) => {
             name={`tags${post._id}`}
             as="textarea"
             rows={3}
-            value={post.hashtags.map((i) => `${i} `)}
+            value={post.hashtags.join(' ')}
             ref={textRef}
             readOnly
           />
