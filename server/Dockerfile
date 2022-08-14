@@ -16,7 +16,7 @@ RUN npm install
 COPY . .
 
 # Exports
-EXPOSE 8081
+EXPOSE 8080
 
 # Install Dependencies & npm start from each package
 CMD ["npm","start"]
