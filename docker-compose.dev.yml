@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+    client:
+      container_name: community-hashtags-client
+      build: ./client
+      volumes:
+       - './client:/app'
+      ports:
+        - "3000:3000"
+      stdin_open: true
+      depends_on:
+        - server
+      env_file: ./client/.env
+
+    server:
+      container_name: community-hashtags-server
+      build: ./server
+      volumes:
+       - './server:/app'
+      ports:
+        - "8190:8190"
+      env_file: ./server/.env

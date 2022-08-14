@@ -10,13 +10,13 @@ WORKDIR /usr/src/app/server
 # Install Dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
 # Copy app source code
 COPY . .
 
 # Exports
-EXPOSE 8080
+EXPOSE 8190
 
 # Install Dependencies & npm start from each package
 CMD ["npm","start"]

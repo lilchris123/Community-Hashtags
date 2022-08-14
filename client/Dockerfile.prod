@@ -1,22 +1,22 @@
-#  Dockerfile for Node Express Backend api (development)
+#  Dockerfile for React Client (Product)
 
 FROM node:10.16-alpine
 
 # ARG NODE_ENV=development
 
 # Create App Directory
-WORKDIR /usr/src/app/server
+WORKDIR /usr/src/app/client
 
 # Install Dependencies
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --production
 
 # Copy app source code
 COPY . .
 
 # Exports
-EXPOSE 8080
+EXPOSE 3000
 
 # Install Dependencies & npm start from each package
-CMD ["npm","start"]
+CMD ["npm","run","build"]

@@ -1,20 +1,36 @@
-version: '3.7'
-
+version: "3.7"
 services:
-    client:
-      container_name: community-hashtags-client
-      build: ./client
+    client_build:
+      container_name: community-hashtags-client-build
+      build: 
+        context: ./client
+        dockerfile: Dockerfile.prod
       volumes:
-       - './client:/app'
+       - './client/build:/app/build'
       ports:
         - "3000:3000"
       stdin_open: true
       depends_on:
         - server
+      env_file: ./client/.env.prod
+
     server:
       container_name: community-hashtags-server
-      build: ./server
+      build: 
+        context: ./server
+        dockerfile: Dockerfile.prod
       volumes:
        - './server:/app'
       ports:
-        - "8081:8081"
+        - "8190:8190"
+      env_file: ./server/.env
+    
+    client:
+      container_name: community-hashtags-client-nginx
+      image: nginx:1.19.4-alpine
+      ports:
+        - 80:80
+      volumes:
+        - ./client/build:/usr/share/nginx/html
+      depends_on: 
+        - client_build
